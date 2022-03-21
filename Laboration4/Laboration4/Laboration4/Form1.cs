@@ -56,11 +56,11 @@ namespace Laboration4
                 counter++;
             }
 
-            //Product fakeProduct = new Product();
-            //fakeProduct.id = 10;
-            //fakeProduct.title = "fake";
-            //fakeProduct.genre = "mer fake";
-            //listProducts.Add(fakeProduct);
+            Product fakeProduct = new Product();
+            fakeProduct.id = 10;
+            fakeProduct.title = "fake";
+            fakeProduct.genre = "mer fake";
+            listProducts.Add(fakeProduct);
         }
 
         public void StoreProducts()
