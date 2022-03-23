@@ -11,5 +11,6 @@ namespace Laboration4
         public int id;
         public string title;
         public string genre;
+        public int stock;
     }
 }

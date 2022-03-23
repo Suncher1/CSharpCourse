@@ -21,10 +21,10 @@ namespace Laboration4.Backend
         }
         public void StoreAllProducts()
         {
-            string productsInCsvFormat = $"id,title,genre\n";
+            string productsInCsvFormat = $"id,title,genre,stock\n";
             foreach (Product product in products)
             {
-                productsInCsvFormat += $"{product.id},{product.title},{product.genre}\n";
+                productsInCsvFormat += $"{product.id},{product.title},{product.genre},{product.stock}\n";
             }
 
             File.WriteAllText(productsCsvFile, productsInCsvFormat);
@@ -49,11 +49,37 @@ namespace Laboration4.Backend
                 product.id = Int32.Parse(dataValues[0]);
                 product.title = dataValues[1];
                 product.genre = dataValues[2];
+                product.stock = Int32.Parse(dataValues[3]);
                 products.Add(product);
 
                 System.Console.WriteLine(line);
                 counter++;
             }
+        }
+
+        public void AddProduct(int id, string title)
+        {
+            Product product = new Product();
+            product.id = id;
+            product.title = title;
+            products.Add(product);
+        }
+
+        public Product GetProductByIndex(int currentSelectedIndex)
+        {
+            if(products == null || currentSelectedIndex+1 > products.Count || currentSelectedIndex == -1)
+            {
+                return null;
+            }
+            return products[currentSelectedIndex];
+        }
+        public void DeleteProductByIndex(int currentSelectedIndex)
+        {
+            if (products == null || currentSelectedIndex + 1 > products.Count)
+            {
+                return;
+            }
+            products.RemoveAt(currentSelectedIndex);
         }
     }
 }
