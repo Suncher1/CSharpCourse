@@ -1,4 +1,4 @@
-﻿id,title,genre
-4,björn,skreck
-2,katt,hemlig
-6,hund,glad
+﻿id,title,genre,stock
+4,björn,skreck,60
+2,katt,hemlig,1
+6,hund,glad,0

@@ -64,7 +64,66 @@ namespace Laboration4
 
         private void listBoxStorage_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var currentSelectedIndex = listBoxStorage.SelectedIndex;
+            Console.WriteLine("CurrentSellexcrwetieam");
+            var product = storage.GetProductByIndex(currentSelectedIndex);
+            if(product == null)
+            {
+                MessageBox.Show("Kan inte hitta produkten");
+            }
+            else 
+            { 
+                FillProductInput(product); 
+            }    
+        }
 
+        private void buttonAddProduct_Click(object sender, EventArgs e)
+        {
+            storage.AddProduct(Int32.Parse(textBoxId.Text), textBoxTitle.Text);
+            DisplayProductsFromStorage();
+            ClearProductInput();
+        }
+
+        private void ClearProductInput()
+        {
+            textBoxId.Text = "";
+            textBoxTitle.Text = "";
+        }
+
+        private void FillProductInput(Product product)
+        {
+            textBoxId.Text = product.id.ToString();
+            textBoxTitle.Text = product.title;
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            var currentSelectedIndex = listBoxStorage.SelectedIndex;
+            Console.WriteLine("CurrentSellexcrwetieam");
+            var product = storage.GetProductByIndex(currentSelectedIndex);
+            if (product == null)
+            {
+                MessageBox.Show("Kan inte hitta produkten");
+            }
+            else
+            {
+                if(product.stock > 0)
+                {
+                    DialogResult dialogResult = MessageBox.Show("", "Vill du verkligen radera produkten?", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        storage.DeleteProductByIndex(currentSelectedIndex);
+                        DisplayProductsFromStorage();
+                        ClearProductInput();
+                    } 
+                }
+                else
+                {
+                    storage.DeleteProductByIndex(currentSelectedIndex);
+                    DisplayProductsFromStorage();
+                    ClearProductInput();
+                }
+            }
         }
     }
 }
