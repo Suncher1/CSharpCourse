@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Laboration4
+namespace Laboration4.Backend
 {
-    public class Product
+    public class CashRegister
     {
-        public int id;
-        public string title;
-        public string genre;
     }
 }
