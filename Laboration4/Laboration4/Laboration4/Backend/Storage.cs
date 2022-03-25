@@ -21,12 +21,14 @@ namespace Laboration4.Backend
         }
         public void StoreAllProducts()
         {
-            string productsInCsvFormat = $"id,title,genre,stock\n";
+            //id,namn,pris,författare,genre,format,språk,plattform,speltid,antal
+            string productsInCsvFormat = $"id,namn,pris,författare,genre,format,språk,plattform,speltid,antal\n";
             foreach (Product product in products)
             {
-                productsInCsvFormat += $"{product.id},{product.title},{product.genre},{product.stock}\n";
+                productsInCsvFormat += $"{product.id},{product.name},{product.price}," +
+                    $"{product.author},{product.genre},{product.format},{product.language}," +
+                    $"{product.platform},{product.gametime},{product.stock}\n";
             }
-
             File.WriteAllText(productsCsvFile, productsInCsvFormat);
         }
         private void ReadAllProducts()
@@ -42,14 +44,20 @@ namespace Laboration4.Backend
                     counter++;
                     continue;
                 }
-
+                //id,namn,pris,författare,genre,format,språk,plattform,speltid,antal
                 //parsa data och lagra in i en produkt
                 string[] dataValues = line.Split(',');
                 Product product = new Product();
                 product.id = Int32.Parse(dataValues[0]);
-                product.title = dataValues[1];
-                product.genre = dataValues[2];
-                product.stock = Int32.Parse(dataValues[3]);
+                product.name = dataValues[1];
+                product.price = Int32.Parse(dataValues[2]);
+                product.author = dataValues[3];
+                product.genre = dataValues[4];
+                product.format = dataValues[5];
+                product.language = dataValues[6];
+                product.platform = dataValues[7];
+                product.gametime = dataValues[8];
+                product.stock = Int32.Parse(dataValues[9]);
                 products.Add(product);
 
                 System.Console.WriteLine(line);
@@ -61,7 +69,7 @@ namespace Laboration4.Backend
         {
             Product product = new Product();
             product.id = id;
-            product.title = title;
+            product.name = title;
             products.Add(product);
         }
 

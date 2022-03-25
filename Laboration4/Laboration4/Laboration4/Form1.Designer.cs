@@ -39,9 +39,9 @@ namespace Laboration4
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAddProduct = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBoxGenre = new System.Windows.Forms.TextBox();
+            this.textBoxAuthor = new System.Windows.Forms.TextBox();
+            this.textBoxPrice = new System.Windows.Forms.TextBox();
             this.textBoxTitle = new System.Windows.Forms.TextBox();
             this.textBoxId = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -49,6 +49,16 @@ namespace Laboration4
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxStorage = new System.Windows.Forms.ListBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBoxFormat = new System.Windows.Forms.TextBox();
+            this.textBoxPlatform = new System.Windows.Forms.TextBox();
+            this.textBoxLanguage = new System.Windows.Forms.TextBox();
+            this.textBoxGametime = new System.Windows.Forms.TextBox();
+            this.textBoxStock = new System.Windows.Forms.TextBox();
             this.TabControl.SuspendLayout();
             this.tabStore.SuspendLayout();
             this.tabStorage.SuspendLayout();
@@ -72,7 +82,7 @@ namespace Laboration4
             this.TabControl.Location = new System.Drawing.Point(0, 0);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(607, 450);
+            this.TabControl.Size = new System.Drawing.Size(776, 450);
             this.TabControl.TabIndex = 1;
             // 
             // tabStore
@@ -118,12 +128,22 @@ namespace Laboration4
             // 
             // tabStorage
             // 
+            this.tabStorage.Controls.Add(this.textBoxStock);
+            this.tabStorage.Controls.Add(this.textBoxGametime);
+            this.tabStorage.Controls.Add(this.textBoxLanguage);
+            this.tabStorage.Controls.Add(this.textBoxPlatform);
+            this.tabStorage.Controls.Add(this.textBoxFormat);
+            this.tabStorage.Controls.Add(this.label10);
+            this.tabStorage.Controls.Add(this.label9);
+            this.tabStorage.Controls.Add(this.label8);
+            this.tabStorage.Controls.Add(this.label7);
+            this.tabStorage.Controls.Add(this.label6);
             this.tabStorage.Controls.Add(this.buttonDelete);
             this.tabStorage.Controls.Add(this.buttonAddProduct);
             this.tabStorage.Controls.Add(this.label5);
-            this.tabStorage.Controls.Add(this.textBox6);
-            this.tabStorage.Controls.Add(this.textBox5);
-            this.tabStorage.Controls.Add(this.textBox4);
+            this.tabStorage.Controls.Add(this.textBoxGenre);
+            this.tabStorage.Controls.Add(this.textBoxAuthor);
+            this.tabStorage.Controls.Add(this.textBoxPrice);
             this.tabStorage.Controls.Add(this.textBoxTitle);
             this.tabStorage.Controls.Add(this.textBoxId);
             this.tabStorage.Controls.Add(this.label4);
@@ -134,14 +154,14 @@ namespace Laboration4
             this.tabStorage.Location = new System.Drawing.Point(4, 22);
             this.tabStorage.Name = "tabStorage";
             this.tabStorage.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStorage.Size = new System.Drawing.Size(599, 424);
+            this.tabStorage.Size = new System.Drawing.Size(768, 424);
             this.tabStorage.TabIndex = 1;
             this.tabStorage.Text = "Lager";
             this.tabStorage.UseVisualStyleBackColor = true;
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(416, 328);
+            this.buttonDelete.Location = new System.Drawing.Point(610, 328);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(105, 43);
             this.buttonDelete.TabIndex = 14;
@@ -151,7 +171,7 @@ namespace Laboration4
             // 
             // buttonAddProduct
             // 
-            this.buttonAddProduct.Location = new System.Drawing.Point(286, 328);
+            this.buttonAddProduct.Location = new System.Drawing.Point(381, 328);
             this.buttonAddProduct.Name = "buttonAddProduct";
             this.buttonAddProduct.Size = new System.Drawing.Size(105, 43);
             this.buttonAddProduct.TabIndex = 13;
@@ -163,39 +183,39 @@ namespace Laboration4
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(270, 233);
+            this.label5.Location = new System.Drawing.Point(281, 238);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 25);
+            this.label5.Size = new System.Drawing.Size(71, 25);
             this.label5.TabIndex = 12;
-            this.label5.Text = "label5";
+            this.label5.Text = "Genre";
             // 
-            // textBox6
+            // textBoxGenre
             // 
-            this.textBox6.Location = new System.Drawing.Point(346, 233);
-            this.textBox6.Multiline = true;
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(120, 30);
-            this.textBox6.TabIndex = 11;
+            this.textBoxGenre.Location = new System.Drawing.Point(381, 233);
+            this.textBoxGenre.Multiline = true;
+            this.textBoxGenre.Name = "textBoxGenre";
+            this.textBoxGenre.Size = new System.Drawing.Size(120, 30);
+            this.textBoxGenre.TabIndex = 11;
             // 
-            // textBox5
+            // textBoxAuthor
             // 
-            this.textBox5.Location = new System.Drawing.Point(346, 187);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(120, 30);
-            this.textBox5.TabIndex = 10;
+            this.textBoxAuthor.Location = new System.Drawing.Point(381, 187);
+            this.textBoxAuthor.Multiline = true;
+            this.textBoxAuthor.Name = "textBoxAuthor";
+            this.textBoxAuthor.Size = new System.Drawing.Size(120, 30);
+            this.textBoxAuthor.TabIndex = 10;
             // 
-            // textBox4
+            // textBoxPrice
             // 
-            this.textBox4.Location = new System.Drawing.Point(346, 137);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(120, 30);
-            this.textBox4.TabIndex = 9;
+            this.textBoxPrice.Location = new System.Drawing.Point(381, 137);
+            this.textBoxPrice.Multiline = true;
+            this.textBoxPrice.Name = "textBoxPrice";
+            this.textBoxPrice.Size = new System.Drawing.Size(120, 30);
+            this.textBoxPrice.TabIndex = 9;
             // 
             // textBoxTitle
             // 
-            this.textBoxTitle.Location = new System.Drawing.Point(346, 84);
+            this.textBoxTitle.Location = new System.Drawing.Point(381, 84);
             this.textBoxTitle.Multiline = true;
             this.textBoxTitle.Name = "textBoxTitle";
             this.textBoxTitle.Size = new System.Drawing.Size(120, 30);
@@ -203,7 +223,7 @@ namespace Laboration4
             // 
             // textBoxId
             // 
-            this.textBoxId.Location = new System.Drawing.Point(346, 29);
+            this.textBoxId.Location = new System.Drawing.Point(381, 29);
             this.textBoxId.Multiline = true;
             this.textBoxId.Name = "textBoxId";
             this.textBoxId.Size = new System.Drawing.Size(120, 30);
@@ -215,25 +235,26 @@ namespace Laboration4
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(270, 187);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(70, 25);
+            this.label4.Size = new System.Drawing.Size(105, 25);
             this.label4.TabIndex = 5;
-            this.label4.Text = "label4";
+            this.label4.Text = "Författare";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(270, 137);
+            this.label3.Location = new System.Drawing.Point(296, 137);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 25);
+            this.label3.Size = new System.Drawing.Size(49, 25);
             this.label3.TabIndex = 4;
-            this.label3.Text = "label3";
+            this.label3.Text = "Pris";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(270, 84);
+            this.label2.Location = new System.Drawing.Point(296, 84);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 25);
             this.label2.TabIndex = 3;
@@ -243,7 +264,7 @@ namespace Laboration4
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(270, 34);
+            this.label1.Location = new System.Drawing.Point(308, 34);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 25);
             this.label1.TabIndex = 2;
@@ -260,11 +281,101 @@ namespace Laboration4
             this.listBoxStorage.TabIndex = 1;
             this.listBoxStorage.SelectedIndexChanged += new System.EventHandler(this.listBoxStorage_SelectedIndexChanged);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(518, 29);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(79, 25);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Format";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(518, 84);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(68, 25);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Språk";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(507, 137);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(97, 25);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "Plattform";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(512, 187);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(78, 25);
+            this.label9.TabIndex = 18;
+            this.label9.Text = "Speltid";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(525, 238);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(61, 25);
+            this.label10.TabIndex = 19;
+            this.label10.Text = "Antal";
+            // 
+            // textBoxFormat
+            // 
+            this.textBoxFormat.Location = new System.Drawing.Point(610, 29);
+            this.textBoxFormat.Multiline = true;
+            this.textBoxFormat.Name = "textBoxFormat";
+            this.textBoxFormat.Size = new System.Drawing.Size(120, 30);
+            this.textBoxFormat.TabIndex = 20;
+            // 
+            // textBoxPlatform
+            // 
+            this.textBoxPlatform.Location = new System.Drawing.Point(610, 137);
+            this.textBoxPlatform.Multiline = true;
+            this.textBoxPlatform.Name = "textBoxPlatform";
+            this.textBoxPlatform.Size = new System.Drawing.Size(120, 30);
+            this.textBoxPlatform.TabIndex = 8;
+            // 
+            // textBoxLanguage
+            // 
+            this.textBoxLanguage.Location = new System.Drawing.Point(610, 84);
+            this.textBoxLanguage.Multiline = true;
+            this.textBoxLanguage.Name = "textBoxLanguage";
+            this.textBoxLanguage.Size = new System.Drawing.Size(120, 30);
+            this.textBoxLanguage.TabIndex = 21;
+            // 
+            // textBoxGametime
+            // 
+            this.textBoxGametime.Location = new System.Drawing.Point(610, 187);
+            this.textBoxGametime.Multiline = true;
+            this.textBoxGametime.Name = "textBoxGametime";
+            this.textBoxGametime.Size = new System.Drawing.Size(120, 30);
+            this.textBoxGametime.TabIndex = 22;
+            // 
+            // textBoxStock
+            // 
+            this.textBoxStock.Location = new System.Drawing.Point(610, 233);
+            this.textBoxStock.Multiline = true;
+            this.textBoxStock.Name = "textBoxStock";
+            this.textBoxStock.Size = new System.Drawing.Size(120, 30);
+            this.textBoxStock.TabIndex = 23;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(607, 450);
+            this.ClientSize = new System.Drawing.Size(776, 450);
             this.Controls.Add(this.TabControl);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -289,9 +400,9 @@ namespace Laboration4
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonAddProduct;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBoxGenre;
+        private System.Windows.Forms.TextBox textBoxAuthor;
+        private System.Windows.Forms.TextBox textBoxPrice;
         private System.Windows.Forms.TextBox textBoxTitle;
         private System.Windows.Forms.TextBox textBoxId;
         private System.Windows.Forms.Label label4;
@@ -301,6 +412,16 @@ namespace Laboration4
         private System.Windows.Forms.ListBox listBoxStorage;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TextBox textBoxStock;
+        private System.Windows.Forms.TextBox textBoxGametime;
+        private System.Windows.Forms.TextBox textBoxLanguage;
+        private System.Windows.Forms.TextBox textBoxPlatform;
+        private System.Windows.Forms.TextBox textBoxFormat;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
     }
 }
 

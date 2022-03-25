@@ -29,20 +29,9 @@ namespace Laboration4
             listBoxStorage.Items.Clear();
             foreach (Product product in listProducts)
             {
-                listBoxStorage.Items.Add($"{product.id} {product.title} {product.genre}");
+                listBoxStorage.Items.Add($"{product.id} {product.name} {product.genre}");
             }
         }
-        //private void DisplayProductsStorage()
-        //{
-        //    listOfProducts.Items.Clear();
-
-        //    foreach (Product product in listProducts)
-        //    {
-        //        listOfProducts.Items.Add($"{product.id} {product.title} {product.genre}");
-        //    }
-        //}
-
-       
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -93,7 +82,7 @@ namespace Laboration4
         private void FillProductInput(Product product)
         {
             textBoxId.Text = product.id.ToString();
-            textBoxTitle.Text = product.title;
+            textBoxTitle.Text = product.name;
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -124,6 +113,11 @@ namespace Laboration4
                     ClearProductInput();
                 }
             }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

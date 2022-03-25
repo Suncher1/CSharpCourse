@@ -1,4 +1,15 @@
-﻿id,title,genre,stock
-4,björn,skreck,60
-2,katt,hemlig,1
-6,hund,glad,0
+﻿id,namn,pris,författare,genre,format,språk,plattform,speltid,antal
+1,Bello Gallico et Civili,449,Julius Caesar,Historia,Inbunden,Latin,,,1
+2,How to Read a Book,149,Mortimer J. Adler,Kursliteratur,Pocket,,,,1
+3,Moby Dick,49,Herman Melville,Äventyr,Pocket,,,,2
+4,Great Gatsby,79,F. Scott Fitzgerald,Noir,E-Bok,,,,3
+5,House of Leaves,49,Mark Z. Danielewski,Skräck,,,,,1
+6,Elden Ring,599,,,,,Playstation 5,,12
+7,Demon's Souls,499,,,,,Playstation 5,,50
+8,Microsoft Flight Simulator,99,,,,,PC,,40
+9,Planescape Torment,399,,,,,PC,,67
+10,Nyckeln till frihet,99,,,DVD,,,142 min,43
+11,Gudfadern,99,,,DVD,,,152 min,5
+12,Konungens återkomst,199,,,Blu-Ray,,,154 min,122
+13,Pulp fiction,199,,,Blu-Ray,,,,6
+14,Schindlers list,99,,,DVD,,,,76
