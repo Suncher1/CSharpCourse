@@ -65,11 +65,8 @@ namespace Laboration4.Backend
             }
         }
 
-        public void AddProduct(int id, string title)
+        public void AddProduct(Product product)
         {
-            Product product = new Product();
-            product.id = id;
-            product.name = title;
             products.Add(product);
         }
 
@@ -88,6 +85,34 @@ namespace Laboration4.Backend
                 return;
             }
             products.RemoveAt(currentSelectedIndex);
+        }
+        public void UpdateProductByIndex(int currentSelectedIndex, Product updatedProduct)
+        {
+            if (products == null || currentSelectedIndex + 1 > products.Count)
+            {
+                return;
+            }
+            products[currentSelectedIndex] = updatedProduct;
+        }
+
+        public bool ProductIdExist(int productId)
+        {
+            if(products == null || products.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                //var product = products.Find(x => x.id == productId);
+                foreach(var product in products)
+                {
+                    if(product.id == productId)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
         }
     }
 }

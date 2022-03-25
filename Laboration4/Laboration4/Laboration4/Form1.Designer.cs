@@ -48,12 +48,12 @@ namespace Laboration4
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.buttonDelete = new System.Windows.Forms.Button();
-            this.buttonAddProduct = new System.Windows.Forms.Button();
+            this.buttonStoreProduct = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxGenre = new System.Windows.Forms.TextBox();
             this.textBoxAuthor = new System.Windows.Forms.TextBox();
             this.textBoxPrice = new System.Windows.Forms.TextBox();
-            this.textBoxTitle = new System.Windows.Forms.TextBox();
+            this.textBoxName = new System.Windows.Forms.TextBox();
             this.textBoxId = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -61,6 +61,7 @@ namespace Laboration4
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxStorage = new System.Windows.Forms.ListBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.buttonNewProduct = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.tabStore.SuspendLayout();
             this.tabStorage.SuspendLayout();
@@ -130,6 +131,7 @@ namespace Laboration4
             // 
             // tabStorage
             // 
+            this.tabStorage.Controls.Add(this.buttonNewProduct);
             this.tabStorage.Controls.Add(this.textBoxStock);
             this.tabStorage.Controls.Add(this.textBoxGametime);
             this.tabStorage.Controls.Add(this.textBoxLanguage);
@@ -141,12 +143,12 @@ namespace Laboration4
             this.tabStorage.Controls.Add(this.label7);
             this.tabStorage.Controls.Add(this.label6);
             this.tabStorage.Controls.Add(this.buttonDelete);
-            this.tabStorage.Controls.Add(this.buttonAddProduct);
+            this.tabStorage.Controls.Add(this.buttonStoreProduct);
             this.tabStorage.Controls.Add(this.label5);
             this.tabStorage.Controls.Add(this.textBoxGenre);
             this.tabStorage.Controls.Add(this.textBoxAuthor);
             this.tabStorage.Controls.Add(this.textBoxPrice);
-            this.tabStorage.Controls.Add(this.textBoxTitle);
+            this.tabStorage.Controls.Add(this.textBoxName);
             this.tabStorage.Controls.Add(this.textBoxId);
             this.tabStorage.Controls.Add(this.label4);
             this.tabStorage.Controls.Add(this.label3);
@@ -255,6 +257,7 @@ namespace Laboration4
             // 
             // buttonDelete
             // 
+            this.buttonDelete.Enabled = false;
             this.buttonDelete.Location = new System.Drawing.Point(610, 328);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(105, 43);
@@ -263,15 +266,15 @@ namespace Laboration4
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
-            // buttonAddProduct
+            // buttonStoreProduct
             // 
-            this.buttonAddProduct.Location = new System.Drawing.Point(381, 328);
-            this.buttonAddProduct.Name = "buttonAddProduct";
-            this.buttonAddProduct.Size = new System.Drawing.Size(105, 43);
-            this.buttonAddProduct.TabIndex = 13;
-            this.buttonAddProduct.Text = "Lägg Till";
-            this.buttonAddProduct.UseVisualStyleBackColor = true;
-            this.buttonAddProduct.Click += new System.EventHandler(this.buttonAddProduct_Click);
+            this.buttonStoreProduct.Location = new System.Drawing.Point(442, 328);
+            this.buttonStoreProduct.Name = "buttonStoreProduct";
+            this.buttonStoreProduct.Size = new System.Drawing.Size(105, 43);
+            this.buttonStoreProduct.TabIndex = 13;
+            this.buttonStoreProduct.Text = "Lagra";
+            this.buttonStoreProduct.UseVisualStyleBackColor = true;
+            this.buttonStoreProduct.Click += new System.EventHandler(this.buttonStoreProduct_Click);
             // 
             // label5
             // 
@@ -309,15 +312,15 @@ namespace Laboration4
             this.textBoxPrice.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxPrice_Validating);
             this.textBoxPrice.Validated += new System.EventHandler(this.textBoxPrice_Validated);
             // 
-            // textBoxTitle
+            // textBoxName
             // 
-            this.textBoxTitle.Location = new System.Drawing.Point(381, 84);
-            this.textBoxTitle.Multiline = true;
-            this.textBoxTitle.Name = "textBoxTitle";
-            this.textBoxTitle.Size = new System.Drawing.Size(120, 30);
-            this.textBoxTitle.TabIndex = 8;
-            this.textBoxTitle.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxTitle_Validating);
-            this.textBoxTitle.Validated += new System.EventHandler(this.textBoxTitle_Validated);
+            this.textBoxName.Location = new System.Drawing.Point(381, 84);
+            this.textBoxName.Multiline = true;
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(120, 30);
+            this.textBoxName.TabIndex = 8;
+            this.textBoxName.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxTitle_Validating);
+            this.textBoxName.Validated += new System.EventHandler(this.textBoxTitle_Validated);
             // 
             // textBoxId
             // 
@@ -384,6 +387,17 @@ namespace Laboration4
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // buttonNewProduct
+            // 
+            this.buttonNewProduct.Enabled = false;
+            this.buttonNewProduct.Location = new System.Drawing.Point(286, 328);
+            this.buttonNewProduct.Name = "buttonNewProduct";
+            this.buttonNewProduct.Size = new System.Drawing.Size(105, 43);
+            this.buttonNewProduct.TabIndex = 24;
+            this.buttonNewProduct.Text = "Ny Produkt";
+            this.buttonNewProduct.UseVisualStyleBackColor = true;
+            this.buttonNewProduct.Click += new System.EventHandler(this.buttonNewProduct_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -412,12 +426,12 @@ namespace Laboration4
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TabPage tabStorage;
         private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.Button buttonAddProduct;
+        private System.Windows.Forms.Button buttonStoreProduct;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBoxGenre;
         private System.Windows.Forms.TextBox textBoxAuthor;
         private System.Windows.Forms.TextBox textBoxPrice;
-        private System.Windows.Forms.TextBox textBoxTitle;
+        private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.TextBox textBoxId;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -437,6 +451,7 @@ namespace Laboration4
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.Button buttonNewProduct;
     }
 }
 
