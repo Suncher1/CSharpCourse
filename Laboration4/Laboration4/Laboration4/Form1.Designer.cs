@@ -274,7 +274,7 @@ namespace Laboration4
             this.buttonStoreProduct.TabIndex = 13;
             this.buttonStoreProduct.Text = "Lagra";
             this.buttonStoreProduct.UseVisualStyleBackColor = true;
-            this.buttonStoreProduct.Click += new System.EventHandler(this.buttonStoreProduct_Click);
+            this.buttonStoreProduct.Click += new System.EventHandler(this.buttonUpdateProduct_Click);
             // 
             // label5
             // 

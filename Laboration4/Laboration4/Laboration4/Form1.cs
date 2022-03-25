@@ -77,6 +77,7 @@ namespace Laboration4
             textBoxGametime.Text = "";
             textBoxStock.Text = "";
             buttonDelete.Enabled = false;
+            buttonNewProduct.Enabled = false;
             selectedProduct = null;
         }
 
@@ -293,7 +294,38 @@ namespace Laboration4
 
         private void buttonUpdateProduct_Click(object sender, EventArgs e)
         {
-
+            if (selectedProduct == null)
+            {
+                Product newProduct = BuildProductFromInput();
+                if(newProduct.id == 0 || string.IsNullOrWhiteSpace(newProduct.name))
+                {
+                    MessageBox.Show("Du måste fylla i data för produkten");
+                }
+                else
+                {
+                    storage.AddProduct(newProduct);
+                    DisplayProductsFromStorage();
+                    ClearProductInput();
+                }
+            }
+            else
+            {
+                var currentSelectedIndex = listBoxStorage.SelectedIndex;
+                Console.WriteLine("CurrentSellexcrwetieam");
+                var product = storage.GetProductByIndex(currentSelectedIndex);
+                if (product == null)
+                {
+                    MessageBox.Show("Kan inte hitta produkten");
+                }
+                else
+                {
+                    //skapa ny produkt
+                    Product updatedProduct = BuildProductFromInput();
+                    storage.UpdateProductByIndex(currentSelectedIndex, updatedProduct);
+                    DisplayProductsFromStorage();
+                    ClearProductInput();
+                }
+            }
         }
 
         private void buttonNewProduct_Click(object sender, EventArgs e)
@@ -301,11 +333,6 @@ namespace Laboration4
             DisplayProductsFromStorage();
             ClearProductInput();
             buttonNewProduct.Enabled = false;
-        }
-
-        private void buttonStoreProduct_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
