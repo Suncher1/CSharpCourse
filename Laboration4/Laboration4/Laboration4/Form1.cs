@@ -26,14 +26,13 @@ namespace Laboration4
         {
             var listProducts = storage.GetAllProducts();
             listBoxStorage.Items.Clear();
+            listOfProducts.Items.Clear();
+            listBoxStorage.DisplayMember = "DisplayInStorage";
+            listOfProducts.DisplayMember = "DisplayListOfProducts";
             foreach (Product product in listProducts)
             {
-                listBoxStorage.Items.Add($"{product.id} {product.name} {product.genre}");
-                //if(product.stock != product.reserved || product.stock == 0)
-                //{
-                    
-                //}
-                listOfProducts.Items.Add($"{product.name} {product.stock}");
+                listBoxStorage.Items.Add(product);
+                listOfProducts.Items.Add(product);
             }
         }
 
@@ -47,32 +46,12 @@ namespace Laboration4
 
         private void listBoxStorage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var currentSelectedIndex = listBoxStorage.SelectedIndex;
-            Console.WriteLine("CurrentSellexcrwetieam");
-
-
-            string selectedValue = listBoxStorage.Items[currentSelectedIndex].ToString();
-            string[] subs = selectedValue.Split(' ');
-            var id = subs[0];
-
-            var product = storage.GetProductByIndex(currentSelectedIndex);
-            if (product == null)
+            selectedProduct = (Product)listBoxStorage.SelectedItem;
+            if (selectedProduct != null)
             {
-                MessageBox.Show("Kan inte hitta produkten");
-            }
-            else
-            {
-                selectedProduct = product;
-                FillProductInput(product);
+                FillProductInput(selectedProduct);
                 buttonNewProduct.Enabled = true;
             }
-        }
-
-        private void buttonAddProduct_Click(object sender, EventArgs e)
-        {
-            //storage.AddProduct(Int32.Parse(textBoxId.Text), textBoxName.Text);
-            //DisplayProductsFromStorage();
-            //ClearProductInput();
         }
 
         private void ClearProductInput()
@@ -95,16 +74,16 @@ namespace Laboration4
         private void FillProductInput(Product product)
         {
             //id,namn,pris,författare,genre,format,språk,plattform,speltid,antal
-            textBoxId.Text = product.id.ToString();
-            textBoxName.Text = product.name;
-            textBoxPrice.Text = product.price.ToString();
-            textBoxAuthor.Text = product.author;
-            textBoxGenre.Text = product.genre;
-            textBoxFormat.Text = product.format;
-            textBoxLanguage.Text = product.language;
-            textBoxPlatform.Text = product.platform;
-            textBoxGametime.Text = product.gametime;
-            textBoxStock.Text = product.stock.ToString();
+            textBoxId.Text = product.Id.ToString();
+            textBoxName.Text = product.Name;
+            textBoxPrice.Text = product.Price.ToString();
+            textBoxAuthor.Text = product.Author;
+            textBoxGenre.Text = product.Genre;
+            textBoxFormat.Text = product.Format;
+            textBoxLanguage.Text = product.Language;
+            textBoxPlatform.Text = product.Platform;
+            textBoxGametime.Text = product.Gametime;
+            textBoxStock.Text = product.Stock.ToString();
             buttonDelete.Enabled = true;
             buttonStoreProduct.Enabled = true;
         }
@@ -116,79 +95,66 @@ namespace Laboration4
             var idParsed = Int32.TryParse(textBoxId.Text, out int idResult);
             if (idParsed)
             {
-                product.id = idResult;
+                product.Id = idResult;
             }
             else
             {
-                product.id = 0;
+                product.Id = 0;
             }
-
-
-            //product.id = Int32.Parse(textBoxId.Text);
-            product.name = textBoxName.Text;
+            product.Name = textBoxName.Text;
 
 
             var priceParsed = Int32.TryParse(textBoxPrice.Text, out int priceResult);
             if (priceParsed)
             {
-                product.price = priceResult;
+                product.Price = priceResult;
             }
             else
             {
-                product.price = 0;
+                product.Price = 0;
             }
 
+            product.Author = textBoxAuthor.Text;
+            product.Genre = textBoxGenre.Text;
+            product.Format = textBoxFormat.Text;
+            product.Language = textBoxLanguage.Text;
+            product.Platform = textBoxPlatform.Text;
+            product.Gametime = textBoxGametime.Text;
 
-            //product.price = Int32.Parse(textBoxPrice.Text);
-
-
-
-
-            product.author = textBoxAuthor.Text;
-            product.genre = textBoxGenre.Text;
-            product.format = textBoxFormat.Text;
-            product.language = textBoxLanguage.Text;
-            product.platform = textBoxPlatform.Text;
-            product.gametime = textBoxGametime.Text;
-            //product.stock = Int32.Parse(textBoxStock.Text);
             var stockParsed = Int32.TryParse(textBoxStock.Text, out int stockResult);
             if (stockParsed)
             {
-                product.stock = stockResult;
+                product.Stock = stockResult;
             }
             else
             {
-                product.stock = 0;
+                product.Stock = 0;
             }
-
-
             return product;
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            var currentSelectedIndex = listBoxStorage.SelectedIndex;
-            Console.WriteLine("CurrentSellexcrwetieam");
-            var product = storage.GetProductByIndex(currentSelectedIndex);
-            if (product == null)
+            selectedProduct = (Product)listBoxStorage.SelectedItem;
+            if(selectedProduct == null)
             {
                 MessageBox.Show("Kan inte hitta produkten");
             }
             else
             {
-                if (product.stock > 0)
+                if (selectedProduct.Stock > 0)
                 {
                     DialogResult dialogResult = MessageBox.Show("", "Vill du verkligen radera produkten?", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        storage.DeleteProductByIndex(currentSelectedIndex);
+                        storage.DeleteProduct(selectedProduct);
                         DisplayProductsFromStorage();
                         ClearProductInput();
                     }
                 }
                 else
                 {
-                    storage.DeleteProductByIndex(currentSelectedIndex);
+                    storage.DeleteProduct(selectedProduct);
                     DisplayProductsFromStorage();
                     ClearProductInput();
                 }
@@ -221,7 +187,7 @@ namespace Laboration4
             }
             else
             {
-                if (n < 0)
+                if (n < 1)
                 {
                     errorMsg = "Id måste vara över 0!";
                 }
@@ -237,7 +203,7 @@ namespace Laboration4
                 //Uppdaterad produkt
                 else
                 {
-                    if (n != selectedProduct.id)
+                    if (n != selectedProduct.Id)
                     {
                         bool productIdAlreadyExist = storage.ProductIdExist(n);
                         if (productIdAlreadyExist)
@@ -259,11 +225,9 @@ namespace Laboration4
             this.errorProvider.SetError(textBoxId, "");
         }
 
-
-
         private void textBoxTitle_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (textBoxName.Text == "")
+            if (string.IsNullOrWhiteSpace(textBoxName.Text))
             {
                 e.Cancel = true;
                 this.errorProvider.SetError(textBoxName, "Titel kan inte vara tom!");
@@ -308,7 +272,7 @@ namespace Laboration4
             if (selectedProduct == null)
             {
                 Product newProduct = BuildProductFromInput();
-                if(newProduct.id == 0 || string.IsNullOrWhiteSpace(newProduct.name))
+                if (newProduct.Id == 0 || string.IsNullOrWhiteSpace(newProduct.Name))
                 {
                     MessageBox.Show("Du måste fylla i data för produkten");
                 }
@@ -321,21 +285,28 @@ namespace Laboration4
             }
             else
             {
-                var currentSelectedIndex = listBoxStorage.SelectedIndex;
-                Console.WriteLine("CurrentSellexcrwetieam");
-                var product = storage.GetProductByIndex(currentSelectedIndex);
-                if (product == null)
+                selectedProduct = (Product)listBoxStorage.SelectedItem;
+                if (selectedProduct != null)
                 {
-                    MessageBox.Show("Kan inte hitta produkten");
-                }
-                else
-                {
-                    //skapa ny produkt
                     Product updatedProduct = BuildProductFromInput();
-                    storage.UpdateProductByIndex(currentSelectedIndex, updatedProduct);
+                    storage.UpdateProduct(selectedProduct, updatedProduct);
                     DisplayProductsFromStorage();
                     ClearProductInput();
                 }
+
+
+
+                //var currentSelectedIndex = listBoxStorage.SelectedIndex;
+                //var product = storage.GetProductByIndex(currentSelectedIndex);
+                //if (product == null)
+                //{
+                //    MessageBox.Show("Kan inte hitta produkten");
+                //}
+                //else
+                //{
+                //    //skapa ny produkt
+                    
+                //}
             }
         }
 
@@ -347,6 +318,10 @@ namespace Laboration4
         }
 
         private void listOfProducts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void buttonBuyProduct_Click(object sender, EventArgs e)
         {
 
         }
