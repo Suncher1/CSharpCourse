@@ -77,15 +77,6 @@ namespace Laboration4.Backend
             products.Add(product);
         }
 
-
-
-        /// <summary>
-        /// return position of product with productId, otherwise -1
-        /// </summary>
-        /// <param name="productId"></param>
-        /// <returns></returns>
-        /// 
-
         public int GetProductIndexById(int productId)
         {
             int noProductIndexFound = -1;
@@ -156,6 +147,19 @@ namespace Laboration4.Backend
                 }
                 return false;
             }
+        }
+
+        public void CheckoutProducts()
+        {
+            foreach(var product in products)
+            {
+                if(product.Reserved > 0)
+                {
+                    product.Stock = product.Stock - product.Reserved;
+                    product.Reserved = 0;
+                }
+            }
+            StoreAllProducts();
         }
     }
 }

@@ -408,5 +408,11 @@ namespace Laboration4
                 DisplayProductsFromStorage();
             }
         }
+
+        private void buttonBuy_Click(object sender, EventArgs e)
+        {
+            storage.CheckoutProducts();
+            DisplayProductsFromStorage();
+        }
     }
 }

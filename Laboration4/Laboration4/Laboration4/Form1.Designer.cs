@@ -33,9 +33,10 @@ namespace Laboration4
             this.listOfProducts = new System.Windows.Forms.ListBox();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.tabStore = new System.Windows.Forms.TabPage();
+            this.buttonReturnProduct = new System.Windows.Forms.Button();
             this.listBoxShoppingCart = new System.Windows.Forms.ListBox();
             this.buttonBuyProduct = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.buttonBuy = new System.Windows.Forms.Button();
             this.tabStorage = new System.Windows.Forms.TabPage();
             this.buttonNewProduct = new System.Windows.Forms.Button();
             this.textBoxStock = new System.Windows.Forms.TextBox();
@@ -62,7 +63,6 @@ namespace Laboration4
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxStorage = new System.Windows.Forms.ListBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.buttonReturnProduct = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.tabStore.SuspendLayout();
             this.tabStorage.SuspendLayout();
@@ -96,7 +96,7 @@ namespace Laboration4
             this.tabStore.Controls.Add(this.buttonReturnProduct);
             this.tabStore.Controls.Add(this.listBoxShoppingCart);
             this.tabStore.Controls.Add(this.buttonBuyProduct);
-            this.tabStore.Controls.Add(this.button4);
+            this.tabStore.Controls.Add(this.buttonBuy);
             this.tabStore.Controls.Add(this.listOfProducts);
             this.tabStore.Location = new System.Drawing.Point(4, 22);
             this.tabStore.Name = "tabStore";
@@ -105,6 +105,18 @@ namespace Laboration4
             this.tabStore.TabIndex = 0;
             this.tabStore.Text = "Butik";
             this.tabStore.UseVisualStyleBackColor = true;
+            // 
+            // buttonReturnProduct
+            // 
+            this.buttonReturnProduct.Enabled = false;
+            this.buttonReturnProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonReturnProduct.Location = new System.Drawing.Point(307, 207);
+            this.buttonReturnProduct.Name = "buttonReturnProduct";
+            this.buttonReturnProduct.Size = new System.Drawing.Size(105, 43);
+            this.buttonReturnProduct.TabIndex = 17;
+            this.buttonReturnProduct.Text = "<<";
+            this.buttonReturnProduct.UseVisualStyleBackColor = true;
+            this.buttonReturnProduct.Click += new System.EventHandler(this.buttonReturnProduct_Click);
             // 
             // listBoxShoppingCart
             // 
@@ -129,14 +141,16 @@ namespace Laboration4
             this.buttonBuyProduct.UseVisualStyleBackColor = true;
             this.buttonBuyProduct.Click += new System.EventHandler(this.buttonBuyProduct_Click);
             // 
-            // button4
+            // buttonBuy
             // 
-            this.button4.Location = new System.Drawing.Point(725, 343);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(105, 43);
-            this.button4.TabIndex = 14;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
+            this.buttonBuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBuy.Location = new System.Drawing.Point(725, 343);
+            this.buttonBuy.Name = "buttonBuy";
+            this.buttonBuy.Size = new System.Drawing.Size(105, 43);
+            this.buttonBuy.TabIndex = 14;
+            this.buttonBuy.Text = "Köp Produkter";
+            this.buttonBuy.UseVisualStyleBackColor = true;
+            this.buttonBuy.Click += new System.EventHandler(this.buttonBuy_Click);
             // 
             // tabStorage
             // 
@@ -175,6 +189,7 @@ namespace Laboration4
             // buttonNewProduct
             // 
             this.buttonNewProduct.Enabled = false;
+            this.buttonNewProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonNewProduct.Location = new System.Drawing.Point(341, 330);
             this.buttonNewProduct.Name = "buttonNewProduct";
             this.buttonNewProduct.Size = new System.Drawing.Size(105, 43);
@@ -280,6 +295,7 @@ namespace Laboration4
             // buttonDelete
             // 
             this.buttonDelete.Enabled = false;
+            this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.Location = new System.Drawing.Point(665, 330);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(105, 43);
@@ -290,6 +306,7 @@ namespace Laboration4
             // 
             // buttonStoreProduct
             // 
+            this.buttonStoreProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonStoreProduct.Location = new System.Drawing.Point(497, 330);
             this.buttonStoreProduct.Name = "buttonStoreProduct";
             this.buttonStoreProduct.Size = new System.Drawing.Size(105, 43);
@@ -409,18 +426,6 @@ namespace Laboration4
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // buttonReturnProduct
-            // 
-            this.buttonReturnProduct.Enabled = false;
-            this.buttonReturnProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonReturnProduct.Location = new System.Drawing.Point(307, 207);
-            this.buttonReturnProduct.Name = "buttonReturnProduct";
-            this.buttonReturnProduct.Size = new System.Drawing.Size(105, 43);
-            this.buttonReturnProduct.TabIndex = 17;
-            this.buttonReturnProduct.Text = "<<";
-            this.buttonReturnProduct.UseVisualStyleBackColor = true;
-            this.buttonReturnProduct.Click += new System.EventHandler(this.buttonReturnProduct_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -460,7 +465,7 @@ namespace Laboration4
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listBoxStorage;
         private System.Windows.Forms.Button buttonBuyProduct;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button buttonBuy;
         private System.Windows.Forms.TextBox textBoxStock;
         private System.Windows.Forms.TextBox textBoxGametime;
         private System.Windows.Forms.TextBox textBoxLanguage;

@@ -1,4 +1,6 @@
-﻿namespace Laboration4
+﻿using Laboration4.Extensions;
+
+namespace Laboration4
 {
     public class Product
     {
@@ -64,7 +66,7 @@
         {
             get
             {
-                return $"{Id} {Name} ({Stock})";
+                return $"{Name.Truncate(28)} ({Stock})";
             }
         }
         public string DisplayListOfProducts
@@ -75,14 +77,14 @@
                 //{
                 //    return $"{Id} {Name}, {Gametime} min ({Stock - Reserved})";
                 //}
-                return $"{Id} {Name} ({Stock - Reserved})";
+                return $"{Name.Truncate(28)} ({Stock - Reserved})";
             }
         }
         public string DisplayReservedProducts
         {
             get
             {
-                return $"{Id} {Name} ({Reserved})";
+                return $"{Name.Truncate(28)} ({Reserved})";
             }
         }
         #endregion
