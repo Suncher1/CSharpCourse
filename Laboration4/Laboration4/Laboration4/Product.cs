@@ -71,6 +71,10 @@
         {
             get
             {
+                //if(!string.IsNullOrEmpty(Gametime))
+                //{
+                //    return $"{Id} {Name}, {Gametime} min ({Stock - Reserved})";
+                //}
                 return $"{Id} {Name} ({Stock - Reserved})";
             }
         }

@@ -8,13 +8,13 @@ namespace Laboration4
     {
         //Global variables
         Storage storage;
-        CashRegister cashRegister;
+        //CashRegister cashRegister;
         Product selectedProduct;
         public Form1()
         {
             InitializeComponent();
             storage = new Storage();
-            cashRegister = new CashRegister();
+            //cashRegister = new CashRegister();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -89,7 +89,7 @@ namespace Laboration4
             textBoxFormat.Text = product.Format;
             textBoxLanguage.Text = product.Language;
             textBoxPlatform.Text = product.Platform;
-            textBoxGametime.Text = product.Gametime;
+            textBoxGametime.Text = product.Gametime.ToString();
             textBoxStock.Text = product.Stock.ToString();
             buttonDelete.Enabled = true;
             buttonStoreProduct.Enabled = true;
@@ -127,6 +127,16 @@ namespace Laboration4
             product.Language = textBoxLanguage.Text;
             product.Platform = textBoxPlatform.Text;
             product.Gametime = textBoxGametime.Text;
+
+            //var gametimeParsed = Int32.TryParse(textBoxGametime.Text, out int gametimeResult);
+            //if (gametimeParsed)
+            //{
+            //    product.Gametime = gametimeResult;
+            //}
+            //else
+            //{
+            //    product.Gametime = 0;
+            //}
 
             var stockParsed = Int32.TryParse(textBoxStock.Text, out int stockResult);
             if (stockParsed)
@@ -245,7 +255,34 @@ namespace Laboration4
         {
             this.errorProvider.SetError(textBoxName, "");
         }
-
+        private void textBoxGametime_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (textBoxGametime.Text.Length > 0)
+            {
+                string errorMsg = "";
+                var isNumeric = int.TryParse(textBoxGametime.Text, out int n);
+                if (!isNumeric)
+                {
+                    errorMsg = "Antal måste vara ett heltal!";
+                }
+                else
+                {
+                    if (n < 0)
+                    {
+                        errorMsg = "Antal måste vara minst 0!";
+                    }
+                }
+                if (errorMsg != "")
+                {
+                    e.Cancel = true;
+                    this.errorProvider.SetError(textBoxGametime, errorMsg);
+                }
+            }
+        }
+        private void textBoxGametime_Validated(object sender, EventArgs e)
+        {
+            this.errorProvider.SetError(textBoxGametime, "");
+        }
         private void textBoxStock_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             string errorMsg = "";
@@ -329,7 +366,7 @@ namespace Laboration4
             selectedProduct = (Product)listOfProducts.SelectedItem;
             if (selectedProduct != null)
             {
-                
+
                 if (selectedProduct.EligibleToBuy())
                 {
                     buttonBuyProduct.Enabled = true;
@@ -362,7 +399,6 @@ namespace Laboration4
                 buttonReturnProduct.Enabled = false;
             }
         }
-
         private void buttonReturnProduct_Click(object sender, EventArgs e)
         {
             buttonReturnProduct.Enabled = false;

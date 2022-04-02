@@ -200,6 +200,8 @@ namespace Laboration4
             this.textBoxGametime.Name = "textBoxGametime";
             this.textBoxGametime.Size = new System.Drawing.Size(120, 30);
             this.textBoxGametime.TabIndex = 22;
+            this.textBoxGametime.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxGametime_Validating);
+            this.textBoxGametime.Validated += new System.EventHandler(this.textBoxGametime_Validated);
             // 
             // textBoxLanguage
             // 
