@@ -19,6 +19,12 @@ namespace Laboration4.Backend
         {
             return products;
         }
+        public List<Product> GetAllReservedProducts()
+        {
+            //https://stackoverflow.com/questions/54726354/get-all-objects-that-have-an-object-that-matches-a-string
+            var reservedProducts = products.FindAll(product => product.Reserved > 0);
+            return reservedProducts;
+        }
         public void StoreAllProducts()
         {
             //id,namn,pris,författare,genre,format,språk,plattform,speltid,antal
@@ -114,12 +120,22 @@ namespace Laboration4.Backend
 
         public void UpdateProduct(Product originalProduct, Product updatedProduct)
         {
-            int productIndex = GetProductIndexById(originalProduct.Id);
+            originalProduct.Id = updatedProduct.Id;
+            originalProduct.Name = updatedProduct.Name;
+            originalProduct.Price = updatedProduct.Price;
+            originalProduct.Author = updatedProduct.Author;
+            originalProduct.Genre = updatedProduct.Genre;
+            originalProduct.Format = updatedProduct.Format;
+            originalProduct.Language = updatedProduct.Language;
+            originalProduct.Platform = updatedProduct.Platform;
+            originalProduct.Stock = updatedProduct.Stock;
 
-            if (productIndex >= 0)
-            {
-                products[productIndex] = updatedProduct;
-            }   
+            //int productIndex = GetProductIndexById(originalProduct.Id);
+
+            //if (productIndex >= 0)
+            //{
+            //    products[productIndex] = updatedProduct;
+            //}   
         }
 
         public bool ProductIdExist(int productId)

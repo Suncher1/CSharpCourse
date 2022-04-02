@@ -34,6 +34,13 @@ namespace Laboration4
                 listBoxStorage.Items.Add(product);
                 listOfProducts.Items.Add(product);
             }
+            var listReservedProducts = storage.GetAllReservedProducts();
+            listBoxShoppingCart.Items.Clear();
+            listBoxShoppingCart.DisplayMember = "DisplayReservedProducts";
+            foreach (Product reservedProduct in listReservedProducts)
+            {
+                listBoxShoppingCart.Items.Add(reservedProduct);
+            }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -136,7 +143,7 @@ namespace Laboration4
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             selectedProduct = (Product)listBoxStorage.SelectedItem;
-            if(selectedProduct == null)
+            if (selectedProduct == null)
             {
                 MessageBox.Show("Kan inte hitta produkten");
             }
@@ -305,7 +312,7 @@ namespace Laboration4
                 //else
                 //{
                 //    //skapa ny produkt
-                    
+
                 //}
             }
         }
@@ -319,11 +326,51 @@ namespace Laboration4
 
         private void listOfProducts_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            selectedProduct = (Product)listOfProducts.SelectedItem;
+            if (selectedProduct != null)
+            {
+                
+                if (selectedProduct.EligibleToBuy())
+                {
+                    buttonBuyProduct.Enabled = true;
+                }
+                else
+                {
+                    buttonBuyProduct.Enabled = false;
+                }
+            }
         }
         private void buttonBuyProduct_Click(object sender, EventArgs e)
         {
+            buttonBuyProduct.Enabled = false;
+            if (selectedProduct != null)
+            {
+                selectedProduct.Reserve();
+                DisplayProductsFromStorage();
+            }
+        }
 
+        private void listBoxShoppingCart_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedProduct = (Product)listBoxShoppingCart.SelectedItem;
+            if (selectedProduct != null)
+            {
+                buttonReturnProduct.Enabled = true;
+            }
+            else
+            {
+                buttonReturnProduct.Enabled = false;
+            }
+        }
+
+        private void buttonReturnProduct_Click(object sender, EventArgs e)
+        {
+            buttonReturnProduct.Enabled = false;
+            if (selectedProduct != null)
+            {
+                selectedProduct.UnReserve();
+                DisplayProductsFromStorage();
+            }
         }
     }
 }

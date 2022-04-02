@@ -33,7 +33,7 @@ namespace Laboration4
             this.listOfProducts = new System.Windows.Forms.ListBox();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.tabStore = new System.Windows.Forms.TabPage();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBoxShoppingCart = new System.Windows.Forms.ListBox();
             this.buttonBuyProduct = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.tabStorage = new System.Windows.Forms.TabPage();
@@ -62,6 +62,7 @@ namespace Laboration4
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxStorage = new System.Windows.Forms.ListBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.buttonReturnProduct = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.tabStore.SuspendLayout();
             this.tabStorage.SuspendLayout();
@@ -92,7 +93,8 @@ namespace Laboration4
             // 
             // tabStore
             // 
-            this.tabStore.Controls.Add(this.listBox1);
+            this.tabStore.Controls.Add(this.buttonReturnProduct);
+            this.tabStore.Controls.Add(this.listBoxShoppingCart);
             this.tabStore.Controls.Add(this.buttonBuyProduct);
             this.tabStore.Controls.Add(this.button4);
             this.tabStore.Controls.Add(this.listOfProducts);
@@ -104,20 +106,22 @@ namespace Laboration4
             this.tabStore.Text = "Butik";
             this.tabStore.UseVisualStyleBackColor = true;
             // 
-            // listBox1
+            // listBoxShoppingCart
             // 
-            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 24;
-            this.listBox1.Location = new System.Drawing.Point(426, 3);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(293, 388);
-            this.listBox1.TabIndex = 16;
+            this.listBoxShoppingCart.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxShoppingCart.FormattingEnabled = true;
+            this.listBoxShoppingCart.ItemHeight = 24;
+            this.listBoxShoppingCart.Location = new System.Drawing.Point(426, 3);
+            this.listBoxShoppingCart.Name = "listBoxShoppingCart";
+            this.listBoxShoppingCart.Size = new System.Drawing.Size(293, 388);
+            this.listBoxShoppingCart.TabIndex = 16;
+            this.listBoxShoppingCart.SelectedIndexChanged += new System.EventHandler(this.listBoxShoppingCart_SelectedIndexChanged);
             // 
             // buttonBuyProduct
             // 
+            this.buttonBuyProduct.Enabled = false;
             this.buttonBuyProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonBuyProduct.Location = new System.Drawing.Point(307, 185);
+            this.buttonBuyProduct.Location = new System.Drawing.Point(307, 146);
             this.buttonBuyProduct.Name = "buttonBuyProduct";
             this.buttonBuyProduct.Size = new System.Drawing.Size(105, 43);
             this.buttonBuyProduct.TabIndex = 15;
@@ -403,6 +407,18 @@ namespace Laboration4
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // buttonReturnProduct
+            // 
+            this.buttonReturnProduct.Enabled = false;
+            this.buttonReturnProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonReturnProduct.Location = new System.Drawing.Point(307, 207);
+            this.buttonReturnProduct.Name = "buttonReturnProduct";
+            this.buttonReturnProduct.Size = new System.Drawing.Size(105, 43);
+            this.buttonReturnProduct.TabIndex = 17;
+            this.buttonReturnProduct.Text = "<<";
+            this.buttonReturnProduct.UseVisualStyleBackColor = true;
+            this.buttonReturnProduct.Click += new System.EventHandler(this.buttonReturnProduct_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -455,7 +471,8 @@ namespace Laboration4
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Button buttonNewProduct;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBoxShoppingCart;
+        private System.Windows.Forms.Button buttonReturnProduct;
     }
 }
 

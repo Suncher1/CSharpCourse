@@ -64,16 +64,43 @@
         {
             get
             {
-                return $"{this.Id} {this.Name} ({this.Stock})";
+                return $"{Id} {Name} ({Stock})";
             }
         }
         public string DisplayListOfProducts
         {
             get
             {
-                return $"{this.Id} {this.Name} ({this.Stock})";
+                return $"{Id} {Name} ({Stock - Reserved})";
+            }
+        }
+        public string DisplayReservedProducts
+        {
+            get
+            {
+                return $"{Id} {Name} ({Reserved})";
             }
         }
         #endregion
+
+        public bool EligibleToBuy()
+        {
+            if (Stock > Reserved)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public void Reserve()
+        {
+            Reserved++;
+        }
+        public void UnReserve()
+        {
+            Reserved--;
+        }
     }
 }
