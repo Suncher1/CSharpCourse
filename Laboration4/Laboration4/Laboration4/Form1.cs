@@ -29,6 +29,11 @@ namespace Laboration4
             foreach (Product product in listProducts)
             {
                 listBoxStorage.Items.Add($"{product.id} {product.name} {product.genre}");
+                //if(product.stock != product.reserved || product.stock == 0)
+                //{
+                    
+                //}
+                listOfProducts.Items.Add($"{product.name} {product.stock}");
             }
         }
 
@@ -44,6 +49,12 @@ namespace Laboration4
         {
             var currentSelectedIndex = listBoxStorage.SelectedIndex;
             Console.WriteLine("CurrentSellexcrwetieam");
+
+
+            string selectedValue = listBoxStorage.Items[currentSelectedIndex].ToString();
+            string[] subs = selectedValue.Split(' ');
+            var id = subs[0];
+
             var product = storage.GetProductByIndex(currentSelectedIndex);
             if (product == null)
             {
@@ -333,6 +344,11 @@ namespace Laboration4
             DisplayProductsFromStorage();
             ClearProductInput();
             buttonNewProduct.Enabled = false;
+        }
+
+        private void listOfProducts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -35,8 +35,8 @@ namespace Laboration4
             this.tabStore = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabStorage = new System.Windows.Forms.TabPage();
+            this.buttonNewProduct = new System.Windows.Forms.Button();
             this.textBoxStock = new System.Windows.Forms.TextBox();
             this.textBoxGametime = new System.Windows.Forms.TextBox();
             this.textBoxLanguage = new System.Windows.Forms.TextBox();
@@ -61,7 +61,7 @@ namespace Laboration4
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxStorage = new System.Windows.Forms.ListBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.buttonNewProduct = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.TabControl.SuspendLayout();
             this.tabStore.SuspendLayout();
             this.tabStorage.SuspendLayout();
@@ -77,6 +77,7 @@ namespace Laboration4
             this.listOfProducts.Name = "listOfProducts";
             this.listOfProducts.Size = new System.Drawing.Size(258, 400);
             this.listOfProducts.TabIndex = 0;
+            this.listOfProducts.SelectedIndexChanged += new System.EventHandler(this.listOfProducts_SelectedIndexChanged);
             // 
             // TabControl
             // 
@@ -86,26 +87,26 @@ namespace Laboration4
             this.TabControl.Location = new System.Drawing.Point(0, 0);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(776, 450);
+            this.TabControl.Size = new System.Drawing.Size(805, 450);
             this.TabControl.TabIndex = 1;
             // 
             // tabStore
             // 
+            this.tabStore.Controls.Add(this.listBox1);
             this.tabStore.Controls.Add(this.button3);
             this.tabStore.Controls.Add(this.button4);
-            this.tabStore.Controls.Add(this.textBox1);
             this.tabStore.Controls.Add(this.listOfProducts);
             this.tabStore.Location = new System.Drawing.Point(4, 22);
             this.tabStore.Name = "tabStore";
             this.tabStore.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStore.Size = new System.Drawing.Size(768, 424);
+            this.tabStore.Size = new System.Drawing.Size(797, 424);
             this.tabStore.TabIndex = 0;
             this.tabStore.Text = "Butik";
             this.tabStore.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(272, 41);
+            this.button3.Location = new System.Drawing.Point(272, 343);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(105, 43);
             this.button3.TabIndex = 15;
@@ -114,20 +115,12 @@ namespace Laboration4
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(425, 41);
+            this.button4.Location = new System.Drawing.Point(662, 343);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(105, 43);
             this.button4.TabIndex = 14;
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(272, 6);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(258, 29);
-            this.textBox1.TabIndex = 1;
             // 
             // tabStorage
             // 
@@ -158,10 +151,21 @@ namespace Laboration4
             this.tabStorage.Location = new System.Drawing.Point(4, 22);
             this.tabStorage.Name = "tabStorage";
             this.tabStorage.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStorage.Size = new System.Drawing.Size(768, 424);
+            this.tabStorage.Size = new System.Drawing.Size(797, 424);
             this.tabStorage.TabIndex = 1;
             this.tabStorage.Text = "Lager";
             this.tabStorage.UseVisualStyleBackColor = true;
+            // 
+            // buttonNewProduct
+            // 
+            this.buttonNewProduct.Enabled = false;
+            this.buttonNewProduct.Location = new System.Drawing.Point(286, 328);
+            this.buttonNewProduct.Name = "buttonNewProduct";
+            this.buttonNewProduct.Size = new System.Drawing.Size(105, 43);
+            this.buttonNewProduct.TabIndex = 24;
+            this.buttonNewProduct.Text = "Ny Produkt";
+            this.buttonNewProduct.UseVisualStyleBackColor = true;
+            this.buttonNewProduct.Click += new System.EventHandler(this.buttonNewProduct_Click);
             // 
             // textBoxStock
             // 
@@ -387,22 +391,21 @@ namespace Laboration4
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // buttonNewProduct
+            // listBox1
             // 
-            this.buttonNewProduct.Enabled = false;
-            this.buttonNewProduct.Location = new System.Drawing.Point(286, 328);
-            this.buttonNewProduct.Name = "buttonNewProduct";
-            this.buttonNewProduct.Size = new System.Drawing.Size(105, 43);
-            this.buttonNewProduct.TabIndex = 24;
-            this.buttonNewProduct.Text = "Ny Produkt";
-            this.buttonNewProduct.UseVisualStyleBackColor = true;
-            this.buttonNewProduct.Click += new System.EventHandler(this.buttonNewProduct_Click);
+            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 33;
+            this.listBox1.Location = new System.Drawing.Point(398, 6);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(258, 400);
+            this.listBox1.TabIndex = 16;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(776, 450);
+            this.ClientSize = new System.Drawing.Size(805, 450);
             this.Controls.Add(this.TabControl);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -410,7 +413,6 @@ namespace Laboration4
             this.Load += new System.EventHandler(this.Form1_Load);
             this.TabControl.ResumeLayout(false);
             this.tabStore.ResumeLayout(false);
-            this.tabStore.PerformLayout();
             this.tabStorage.ResumeLayout(false);
             this.tabStorage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
@@ -423,7 +425,6 @@ namespace Laboration4
         private System.Windows.Forms.ListBox listOfProducts;
         private System.Windows.Forms.TabControl TabControl;
         private System.Windows.Forms.TabPage tabStore;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TabPage tabStorage;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonStoreProduct;
@@ -452,6 +453,7 @@ namespace Laboration4
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Button buttonNewProduct;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

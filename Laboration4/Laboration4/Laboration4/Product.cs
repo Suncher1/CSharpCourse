@@ -19,5 +19,6 @@ namespace Laboration4
         public string platform;
         public string gametime;
         public int stock;
+        public int reserved;
     }
 }
