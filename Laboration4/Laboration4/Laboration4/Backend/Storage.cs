@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Laboration4.Backend
 {
@@ -8,6 +9,7 @@ namespace Laboration4.Backend
     {
         List<Product> products;
         readonly string productsCsvFile = $"{Directory.GetCurrentDirectory()}\\Csv\\Product.csv";
+        string latestPurchase = "";
 
         public Storage()
         {
@@ -15,9 +17,27 @@ namespace Laboration4.Backend
             //Läsa in producter från csv fil
             ReadAllProducts();
         }
-        public List<Product> GetAllProducts()
+        public List<Product> GetAllProducts(string filter = "")
         {
-            return products;
+            if (string.IsNullOrWhiteSpace(filter))
+            {
+                return products;
+            }
+            else
+            {
+                return products.Where(product => 
+                    product.Name.Contains(filter) || 
+                    product.Id.ToString().Contains(filter) ||
+                    product.Author.Contains(filter)
+                ).ToList(); 
+            }
+
+        }
+        public List<Product> GetAllReservedProducts()
+        {
+            //https://stackoverflow.com/questions/54726354/get-all-objects-that-have-an-object-that-matches-a-string
+            var reservedProducts = products.FindAll(product => product.Reserved > 0);
+            return reservedProducts;
         }
         public void StoreAllProducts()
         {
@@ -25,9 +45,9 @@ namespace Laboration4.Backend
             string productsInCsvFormat = $"id,namn,pris,författare,genre,format,språk,plattform,speltid,antal\n";
             foreach (Product product in products)
             {
-                productsInCsvFormat += $"{product.id},{product.name},{product.price}," +
-                    $"{product.author},{product.genre},{product.format},{product.language}," +
-                    $"{product.platform},{product.gametime},{product.stock}\n";
+                productsInCsvFormat += $"{product.Id},{product.Name},{product.Price}," +
+                    $"{product.Author},{product.Genre},{product.Format},{product.Language}," +
+                    $"{product.Platform},{product.Gametime},{product.Stock}\n";
             }
             File.WriteAllText(productsCsvFile, productsInCsvFormat);
         }
@@ -48,17 +68,17 @@ namespace Laboration4.Backend
                 //parsa data och lagra in i en produkt
                 string[] dataValues = line.Split(',');
                 Product product = new Product();
-                product.id = Int32.Parse(dataValues[0]);
-                product.name = dataValues[1];
-                product.price = Int32.Parse(dataValues[2]);
-                product.author = dataValues[3];
-                product.genre = dataValues[4];
-                product.format = dataValues[5];
-                product.language = dataValues[6];
-                product.platform = dataValues[7];
-                product.gametime = dataValues[8];
-                product.stock = Int32.Parse(dataValues[9]);
-                product.reserved = 0;
+                product.Id = Int32.Parse(dataValues[0]);
+                product.Name = dataValues[1];
+                product.Price = Int32.Parse(dataValues[2]);
+                product.Author = dataValues[3];
+                product.Genre = dataValues[4];
+                product.Format = dataValues[5];
+                product.Language = dataValues[6];
+                product.Platform = dataValues[7];
+                product.Gametime = dataValues[8];
+                product.Stock = Int32.Parse(dataValues[9]);
+                product.Reserved = 0;
                 products.Add(product);
 
                 System.Console.WriteLine(line);
@@ -71,26 +91,19 @@ namespace Laboration4.Backend
             products.Add(product);
         }
 
-      
-        
-        /// <summary>
-        /// return position of product with productId, otherwise -1
-        /// </summary>
-        /// <param name="productId"></param>
-        /// <returns></returns>
         public int GetProductIndexById(int productId)
         {
             int noProductIndexFound = -1;
 
             if (products == null || products.Count == 0)
             {
-                return noProductIndexFound; 
+                return noProductIndexFound;
             }
 
             int productPosition = 0;
             foreach (var product in products)
-            {                
-                if (product.id == productId)
+            {
+                if (product.Id == productId)
                 {
                     return productPosition;
                 }
@@ -100,39 +113,35 @@ namespace Laboration4.Backend
             return noProductIndexFound;
         }
 
-        public Product GetProductById(int productId)
+        public void DeleteProduct(Product product)
         {
-            foreach (var product in products)
-            {
-                if (product.id == productId)
-                {
-                    return product;
-                }
-            }
-            return null;
-        }
-    
-        public void DeleteProductById(int productId)
-        {
-            int productIndex = GetProductIndexById(productId);
+            int productIndex = GetProductIndexById(product.Id);
 
             if (productIndex >= 0)
             {
                 products.RemoveAt(productIndex);
-            }            
+            }
         }
 
-        public void UpdateProductById(int productId, Product updatedProduct)
+        public void UpdateProduct(Product originalProduct, Product updatedProduct)
         {
-            int productIndex = GetProductIndexById(productId);
+            originalProduct.Id = updatedProduct.Id;
+            originalProduct.Name = updatedProduct.Name;
+            originalProduct.Price = updatedProduct.Price;
+            originalProduct.Author = updatedProduct.Author;
+            originalProduct.Genre = updatedProduct.Genre;
+            originalProduct.Format = updatedProduct.Format;
+            originalProduct.Language = updatedProduct.Language;
+            originalProduct.Platform = updatedProduct.Platform;
+            originalProduct.Stock = updatedProduct.Stock;
 
-            if (productIndex >= 0)
-            {
-                products[productIndex] = updatedProduct;
-            }   
+            //int productIndex = GetProductIndexById(originalProduct.Id);
+
+            //if (productIndex >= 0)
+            //{
+            //    products[productIndex] = updatedProduct;
+            //}   
         }
-
-      
 
         public bool ProductIdExist(int productId)
         {
@@ -145,7 +154,7 @@ namespace Laboration4.Backend
                 //var product = products.Find(x => x.id == productId);
                 foreach (var product in products)
                 {
-                    if (product.id == productId)
+                    if (product.Id == productId)
                     {
                         return true;
                     }
@@ -154,37 +163,25 @@ namespace Laboration4.Backend
             }
         }
 
-
-        #region byindex
-
-        public Product GetProductByIndex(int currentSelectedIndex)
+        public void CheckoutProducts()
         {
-            if (products == null || currentSelectedIndex + 1 > products.Count || currentSelectedIndex == -1)
+            latestPurchase = "KVITTO: \n";
+            foreach (var product in products)
             {
-                return null;
+                if (product.Reserved > 0)
+                {
+                    latestPurchase += $"{product.Name} Antal:{product.Reserved} Pris:{product.Price * product.Reserved}\n";
+                    product.Stock = product.Stock - product.Reserved;
+                    product.Reserved = 0;
+                }
             }
-            return products[currentSelectedIndex];
+            StoreAllProducts();
         }
 
-        public void DeleteProductByIndex(int currentSelectedIndex)
+        public string GetLatestPurchase()
         {
-            if (products == null || currentSelectedIndex + 1 > products.Count)
-            {
-                return;
-            }
-            products.RemoveAt(currentSelectedIndex);
+            return latestPurchase;
         }
-
-        public void UpdateProductByIndex(int currentSelectedIndex, Product updatedProduct)
-        {
-            if (products == null || currentSelectedIndex + 1 > products.Count)
-            {
-                return;
-            }
-            products[currentSelectedIndex] = updatedProduct;
-        }
-        #endregion
-
     }
 }
 

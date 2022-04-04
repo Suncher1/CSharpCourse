@@ -33,8 +33,10 @@ namespace Laboration4
             this.listOfProducts = new System.Windows.Forms.ListBox();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.tabStore = new System.Windows.Forms.TabPage();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.buttonReturnProduct = new System.Windows.Forms.Button();
+            this.listBoxShoppingCart = new System.Windows.Forms.ListBox();
+            this.buttonBuyProduct = new System.Windows.Forms.Button();
+            this.buttonBuy = new System.Windows.Forms.Button();
             this.tabStorage = new System.Windows.Forms.TabPage();
             this.buttonNewProduct = new System.Windows.Forms.Button();
             this.textBoxStock = new System.Windows.Forms.TextBox();
@@ -61,7 +63,9 @@ namespace Laboration4
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxStorage = new System.Windows.Forms.ListBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
+            this.buttonSearch = new System.Windows.Forms.Button();
+            this.buttonReturn = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.tabStore.SuspendLayout();
             this.tabStorage.SuspendLayout();
@@ -70,12 +74,12 @@ namespace Laboration4
             // 
             // listOfProducts
             // 
-            this.listOfProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listOfProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listOfProducts.FormattingEnabled = true;
-            this.listOfProducts.ItemHeight = 33;
-            this.listOfProducts.Location = new System.Drawing.Point(8, 6);
+            this.listOfProducts.ItemHeight = 24;
+            this.listOfProducts.Location = new System.Drawing.Point(8, 54);
             this.listOfProducts.Name = "listOfProducts";
-            this.listOfProducts.Size = new System.Drawing.Size(258, 400);
+            this.listOfProducts.Size = new System.Drawing.Size(293, 340);
             this.listOfProducts.TabIndex = 0;
             this.listOfProducts.SelectedIndexChanged += new System.EventHandler(this.listOfProducts_SelectedIndexChanged);
             // 
@@ -87,40 +91,73 @@ namespace Laboration4
             this.TabControl.Location = new System.Drawing.Point(0, 0);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(805, 450);
+            this.TabControl.Size = new System.Drawing.Size(859, 450);
             this.TabControl.TabIndex = 1;
             // 
             // tabStore
             // 
-            this.tabStore.Controls.Add(this.listBox1);
-            this.tabStore.Controls.Add(this.button3);
-            this.tabStore.Controls.Add(this.button4);
+            this.tabStore.Controls.Add(this.buttonReturn);
+            this.tabStore.Controls.Add(this.buttonSearch);
+            this.tabStore.Controls.Add(this.textBoxSearch);
+            this.tabStore.Controls.Add(this.buttonReturnProduct);
+            this.tabStore.Controls.Add(this.listBoxShoppingCart);
+            this.tabStore.Controls.Add(this.buttonBuyProduct);
+            this.tabStore.Controls.Add(this.buttonBuy);
             this.tabStore.Controls.Add(this.listOfProducts);
             this.tabStore.Location = new System.Drawing.Point(4, 22);
             this.tabStore.Name = "tabStore";
             this.tabStore.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStore.Size = new System.Drawing.Size(797, 424);
+            this.tabStore.Size = new System.Drawing.Size(851, 424);
             this.tabStore.TabIndex = 0;
             this.tabStore.Text = "Butik";
             this.tabStore.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // buttonReturnProduct
             // 
-            this.button3.Location = new System.Drawing.Point(272, 343);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(105, 43);
-            this.button3.TabIndex = 15;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.buttonReturnProduct.Enabled = false;
+            this.buttonReturnProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonReturnProduct.Location = new System.Drawing.Point(307, 207);
+            this.buttonReturnProduct.Name = "buttonReturnProduct";
+            this.buttonReturnProduct.Size = new System.Drawing.Size(105, 43);
+            this.buttonReturnProduct.TabIndex = 17;
+            this.buttonReturnProduct.Text = "<<";
+            this.buttonReturnProduct.UseVisualStyleBackColor = true;
+            this.buttonReturnProduct.Click += new System.EventHandler(this.buttonReturnProduct_Click);
             // 
-            // button4
+            // listBoxShoppingCart
             // 
-            this.button4.Location = new System.Drawing.Point(662, 343);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(105, 43);
-            this.button4.TabIndex = 14;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
+            this.listBoxShoppingCart.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxShoppingCart.FormattingEnabled = true;
+            this.listBoxShoppingCart.ItemHeight = 24;
+            this.listBoxShoppingCart.Location = new System.Drawing.Point(426, 51);
+            this.listBoxShoppingCart.Name = "listBoxShoppingCart";
+            this.listBoxShoppingCart.Size = new System.Drawing.Size(293, 340);
+            this.listBoxShoppingCart.TabIndex = 16;
+            this.listBoxShoppingCart.SelectedIndexChanged += new System.EventHandler(this.listBoxShoppingCart_SelectedIndexChanged);
+            // 
+            // buttonBuyProduct
+            // 
+            this.buttonBuyProduct.Enabled = false;
+            this.buttonBuyProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBuyProduct.Location = new System.Drawing.Point(307, 146);
+            this.buttonBuyProduct.Name = "buttonBuyProduct";
+            this.buttonBuyProduct.Size = new System.Drawing.Size(105, 43);
+            this.buttonBuyProduct.TabIndex = 15;
+            this.buttonBuyProduct.Text = ">>";
+            this.buttonBuyProduct.UseVisualStyleBackColor = true;
+            this.buttonBuyProduct.Click += new System.EventHandler(this.buttonBuyProduct_Click);
+            // 
+            // buttonBuy
+            // 
+            this.buttonBuy.Enabled = false;
+            this.buttonBuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBuy.Location = new System.Drawing.Point(725, 343);
+            this.buttonBuy.Name = "buttonBuy";
+            this.buttonBuy.Size = new System.Drawing.Size(105, 43);
+            this.buttonBuy.TabIndex = 14;
+            this.buttonBuy.Text = "Köp Produkter";
+            this.buttonBuy.UseVisualStyleBackColor = true;
+            this.buttonBuy.Click += new System.EventHandler(this.buttonBuy_Click);
             // 
             // tabStorage
             // 
@@ -151,7 +188,7 @@ namespace Laboration4
             this.tabStorage.Location = new System.Drawing.Point(4, 22);
             this.tabStorage.Name = "tabStorage";
             this.tabStorage.Padding = new System.Windows.Forms.Padding(3);
-            this.tabStorage.Size = new System.Drawing.Size(797, 424);
+            this.tabStorage.Size = new System.Drawing.Size(851, 424);
             this.tabStorage.TabIndex = 1;
             this.tabStorage.Text = "Lager";
             this.tabStorage.UseVisualStyleBackColor = true;
@@ -159,7 +196,8 @@ namespace Laboration4
             // buttonNewProduct
             // 
             this.buttonNewProduct.Enabled = false;
-            this.buttonNewProduct.Location = new System.Drawing.Point(286, 328);
+            this.buttonNewProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonNewProduct.Location = new System.Drawing.Point(341, 330);
             this.buttonNewProduct.Name = "buttonNewProduct";
             this.buttonNewProduct.Size = new System.Drawing.Size(105, 43);
             this.buttonNewProduct.TabIndex = 24;
@@ -169,7 +207,7 @@ namespace Laboration4
             // 
             // textBoxStock
             // 
-            this.textBoxStock.Location = new System.Drawing.Point(610, 233);
+            this.textBoxStock.Location = new System.Drawing.Point(665, 235);
             this.textBoxStock.Multiline = true;
             this.textBoxStock.Name = "textBoxStock";
             this.textBoxStock.Size = new System.Drawing.Size(120, 30);
@@ -179,15 +217,17 @@ namespace Laboration4
             // 
             // textBoxGametime
             // 
-            this.textBoxGametime.Location = new System.Drawing.Point(610, 187);
+            this.textBoxGametime.Location = new System.Drawing.Point(665, 189);
             this.textBoxGametime.Multiline = true;
             this.textBoxGametime.Name = "textBoxGametime";
             this.textBoxGametime.Size = new System.Drawing.Size(120, 30);
             this.textBoxGametime.TabIndex = 22;
+            this.textBoxGametime.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxGametime_Validating);
+            this.textBoxGametime.Validated += new System.EventHandler(this.textBoxGametime_Validated);
             // 
             // textBoxLanguage
             // 
-            this.textBoxLanguage.Location = new System.Drawing.Point(610, 84);
+            this.textBoxLanguage.Location = new System.Drawing.Point(665, 86);
             this.textBoxLanguage.Multiline = true;
             this.textBoxLanguage.Name = "textBoxLanguage";
             this.textBoxLanguage.Size = new System.Drawing.Size(120, 30);
@@ -195,7 +235,7 @@ namespace Laboration4
             // 
             // textBoxPlatform
             // 
-            this.textBoxPlatform.Location = new System.Drawing.Point(610, 137);
+            this.textBoxPlatform.Location = new System.Drawing.Point(665, 139);
             this.textBoxPlatform.Multiline = true;
             this.textBoxPlatform.Name = "textBoxPlatform";
             this.textBoxPlatform.Size = new System.Drawing.Size(120, 30);
@@ -203,7 +243,7 @@ namespace Laboration4
             // 
             // textBoxFormat
             // 
-            this.textBoxFormat.Location = new System.Drawing.Point(610, 29);
+            this.textBoxFormat.Location = new System.Drawing.Point(665, 31);
             this.textBoxFormat.Multiline = true;
             this.textBoxFormat.Name = "textBoxFormat";
             this.textBoxFormat.Size = new System.Drawing.Size(120, 30);
@@ -213,7 +253,7 @@ namespace Laboration4
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(525, 238);
+            this.label10.Location = new System.Drawing.Point(580, 240);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(61, 25);
             this.label10.TabIndex = 19;
@@ -223,7 +263,7 @@ namespace Laboration4
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(512, 187);
+            this.label9.Location = new System.Drawing.Point(567, 189);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(78, 25);
             this.label9.TabIndex = 18;
@@ -233,7 +273,7 @@ namespace Laboration4
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(507, 137);
+            this.label8.Location = new System.Drawing.Point(562, 139);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(97, 25);
             this.label8.TabIndex = 17;
@@ -243,7 +283,7 @@ namespace Laboration4
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(518, 84);
+            this.label7.Location = new System.Drawing.Point(573, 86);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(68, 25);
             this.label7.TabIndex = 16;
@@ -253,7 +293,7 @@ namespace Laboration4
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(518, 29);
+            this.label6.Location = new System.Drawing.Point(573, 31);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 25);
             this.label6.TabIndex = 15;
@@ -262,7 +302,8 @@ namespace Laboration4
             // buttonDelete
             // 
             this.buttonDelete.Enabled = false;
-            this.buttonDelete.Location = new System.Drawing.Point(610, 328);
+            this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDelete.Location = new System.Drawing.Point(665, 330);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(105, 43);
             this.buttonDelete.TabIndex = 14;
@@ -272,7 +313,8 @@ namespace Laboration4
             // 
             // buttonStoreProduct
             // 
-            this.buttonStoreProduct.Location = new System.Drawing.Point(442, 328);
+            this.buttonStoreProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStoreProduct.Location = new System.Drawing.Point(497, 330);
             this.buttonStoreProduct.Name = "buttonStoreProduct";
             this.buttonStoreProduct.Size = new System.Drawing.Size(105, 43);
             this.buttonStoreProduct.TabIndex = 13;
@@ -284,7 +326,7 @@ namespace Laboration4
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(281, 238);
+            this.label5.Location = new System.Drawing.Point(336, 240);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(71, 25);
             this.label5.TabIndex = 12;
@@ -292,7 +334,7 @@ namespace Laboration4
             // 
             // textBoxGenre
             // 
-            this.textBoxGenre.Location = new System.Drawing.Point(381, 233);
+            this.textBoxGenre.Location = new System.Drawing.Point(436, 235);
             this.textBoxGenre.Multiline = true;
             this.textBoxGenre.Name = "textBoxGenre";
             this.textBoxGenre.Size = new System.Drawing.Size(120, 30);
@@ -300,7 +342,7 @@ namespace Laboration4
             // 
             // textBoxAuthor
             // 
-            this.textBoxAuthor.Location = new System.Drawing.Point(381, 187);
+            this.textBoxAuthor.Location = new System.Drawing.Point(436, 189);
             this.textBoxAuthor.Multiline = true;
             this.textBoxAuthor.Name = "textBoxAuthor";
             this.textBoxAuthor.Size = new System.Drawing.Size(120, 30);
@@ -308,7 +350,7 @@ namespace Laboration4
             // 
             // textBoxPrice
             // 
-            this.textBoxPrice.Location = new System.Drawing.Point(381, 137);
+            this.textBoxPrice.Location = new System.Drawing.Point(436, 139);
             this.textBoxPrice.Multiline = true;
             this.textBoxPrice.Name = "textBoxPrice";
             this.textBoxPrice.Size = new System.Drawing.Size(120, 30);
@@ -318,7 +360,7 @@ namespace Laboration4
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(381, 84);
+            this.textBoxName.Location = new System.Drawing.Point(436, 86);
             this.textBoxName.Multiline = true;
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(120, 30);
@@ -328,7 +370,7 @@ namespace Laboration4
             // 
             // textBoxId
             // 
-            this.textBoxId.Location = new System.Drawing.Point(381, 29);
+            this.textBoxId.Location = new System.Drawing.Point(436, 31);
             this.textBoxId.Multiline = true;
             this.textBoxId.Name = "textBoxId";
             this.textBoxId.Size = new System.Drawing.Size(120, 30);
@@ -340,7 +382,7 @@ namespace Laboration4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(270, 187);
+            this.label4.Location = new System.Drawing.Point(325, 189);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(105, 25);
             this.label4.TabIndex = 5;
@@ -350,7 +392,7 @@ namespace Laboration4
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(296, 137);
+            this.label3.Location = new System.Drawing.Point(351, 139);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 25);
             this.label3.TabIndex = 4;
@@ -360,7 +402,7 @@ namespace Laboration4
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(296, 84);
+            this.label2.Location = new System.Drawing.Point(351, 86);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 25);
             this.label2.TabIndex = 3;
@@ -370,7 +412,7 @@ namespace Laboration4
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(308, 34);
+            this.label1.Location = new System.Drawing.Point(363, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 25);
             this.label1.TabIndex = 2;
@@ -378,12 +420,12 @@ namespace Laboration4
             // 
             // listBoxStorage
             // 
-            this.listBoxStorage.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxStorage.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxStorage.FormattingEnabled = true;
-            this.listBoxStorage.ItemHeight = 33;
+            this.listBoxStorage.ItemHeight = 24;
             this.listBoxStorage.Location = new System.Drawing.Point(8, 6);
             this.listBoxStorage.Name = "listBoxStorage";
-            this.listBoxStorage.Size = new System.Drawing.Size(256, 400);
+            this.listBoxStorage.Size = new System.Drawing.Size(293, 388);
             this.listBoxStorage.TabIndex = 1;
             this.listBoxStorage.SelectedIndexChanged += new System.EventHandler(this.listBoxStorage_SelectedIndexChanged);
             // 
@@ -391,21 +433,42 @@ namespace Laboration4
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // listBox1
+            // textBoxSearch
             // 
-            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 33;
-            this.listBox1.Location = new System.Drawing.Point(398, 6);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(258, 400);
-            this.listBox1.TabIndex = 16;
+            this.textBoxSearch.Location = new System.Drawing.Point(8, 6);
+            this.textBoxSearch.Multiline = true;
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(203, 29);
+            this.textBoxSearch.TabIndex = 18;
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSearch.Location = new System.Drawing.Point(217, 6);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(84, 29);
+            this.buttonSearch.TabIndex = 19;
+            this.buttonSearch.Text = "Sök";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+            // 
+            // buttonReturn
+            // 
+            this.buttonReturn.Enabled = false;
+            this.buttonReturn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonReturn.Location = new System.Drawing.Point(307, 357);
+            this.buttonReturn.Name = "buttonReturn";
+            this.buttonReturn.Size = new System.Drawing.Size(84, 29);
+            this.buttonReturn.TabIndex = 20;
+            this.buttonReturn.Text = "Retur";
+            this.buttonReturn.UseVisualStyleBackColor = true;
+            this.buttonReturn.Click += new System.EventHandler(this.buttonReturn_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(805, 450);
+            this.ClientSize = new System.Drawing.Size(859, 450);
             this.Controls.Add(this.TabControl);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -413,6 +476,7 @@ namespace Laboration4
             this.Load += new System.EventHandler(this.Form1_Load);
             this.TabControl.ResumeLayout(false);
             this.tabStore.ResumeLayout(false);
+            this.tabStore.PerformLayout();
             this.tabStorage.ResumeLayout(false);
             this.tabStorage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
@@ -439,8 +503,8 @@ namespace Laboration4
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listBoxStorage;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button buttonBuyProduct;
+        private System.Windows.Forms.Button buttonBuy;
         private System.Windows.Forms.TextBox textBoxStock;
         private System.Windows.Forms.TextBox textBoxGametime;
         private System.Windows.Forms.TextBox textBoxLanguage;
@@ -453,7 +517,11 @@ namespace Laboration4
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Button buttonNewProduct;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBoxShoppingCart;
+        private System.Windows.Forms.Button buttonReturnProduct;
+        private System.Windows.Forms.Button buttonSearch;
+        private System.Windows.Forms.TextBox textBoxSearch;
+        private System.Windows.Forms.Button buttonReturn;
     }
 }
 
