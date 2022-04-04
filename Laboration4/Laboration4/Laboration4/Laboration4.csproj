@@ -47,7 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Backend\CashRegister.cs" />
     <Compile Include="Backend\Storage.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Form1.cs">

@@ -108,5 +108,9 @@ namespace Laboration4
         {
             Reserved--;
         }
+        public void Return()
+        {
+            Stock++;
+        }
     }
 }

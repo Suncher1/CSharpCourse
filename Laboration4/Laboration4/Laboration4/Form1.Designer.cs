@@ -63,6 +63,9 @@ namespace Laboration4
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxStorage = new System.Windows.Forms.ListBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
+            this.buttonSearch = new System.Windows.Forms.Button();
+            this.buttonReturn = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.tabStore.SuspendLayout();
             this.tabStorage.SuspendLayout();
@@ -74,9 +77,9 @@ namespace Laboration4
             this.listOfProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listOfProducts.FormattingEnabled = true;
             this.listOfProducts.ItemHeight = 24;
-            this.listOfProducts.Location = new System.Drawing.Point(8, 6);
+            this.listOfProducts.Location = new System.Drawing.Point(8, 54);
             this.listOfProducts.Name = "listOfProducts";
-            this.listOfProducts.Size = new System.Drawing.Size(293, 388);
+            this.listOfProducts.Size = new System.Drawing.Size(293, 340);
             this.listOfProducts.TabIndex = 0;
             this.listOfProducts.SelectedIndexChanged += new System.EventHandler(this.listOfProducts_SelectedIndexChanged);
             // 
@@ -93,6 +96,9 @@ namespace Laboration4
             // 
             // tabStore
             // 
+            this.tabStore.Controls.Add(this.buttonReturn);
+            this.tabStore.Controls.Add(this.buttonSearch);
+            this.tabStore.Controls.Add(this.textBoxSearch);
             this.tabStore.Controls.Add(this.buttonReturnProduct);
             this.tabStore.Controls.Add(this.listBoxShoppingCart);
             this.tabStore.Controls.Add(this.buttonBuyProduct);
@@ -123,9 +129,9 @@ namespace Laboration4
             this.listBoxShoppingCart.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxShoppingCart.FormattingEnabled = true;
             this.listBoxShoppingCart.ItemHeight = 24;
-            this.listBoxShoppingCart.Location = new System.Drawing.Point(426, 3);
+            this.listBoxShoppingCart.Location = new System.Drawing.Point(426, 51);
             this.listBoxShoppingCart.Name = "listBoxShoppingCart";
-            this.listBoxShoppingCart.Size = new System.Drawing.Size(293, 388);
+            this.listBoxShoppingCart.Size = new System.Drawing.Size(293, 340);
             this.listBoxShoppingCart.TabIndex = 16;
             this.listBoxShoppingCart.SelectedIndexChanged += new System.EventHandler(this.listBoxShoppingCart_SelectedIndexChanged);
             // 
@@ -143,6 +149,7 @@ namespace Laboration4
             // 
             // buttonBuy
             // 
+            this.buttonBuy.Enabled = false;
             this.buttonBuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBuy.Location = new System.Drawing.Point(725, 343);
             this.buttonBuy.Name = "buttonBuy";
@@ -426,6 +433,37 @@ namespace Laboration4
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.Location = new System.Drawing.Point(8, 6);
+            this.textBoxSearch.Multiline = true;
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(203, 29);
+            this.textBoxSearch.TabIndex = 18;
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSearch.Location = new System.Drawing.Point(217, 6);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(84, 29);
+            this.buttonSearch.TabIndex = 19;
+            this.buttonSearch.Text = "Sök";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+            // 
+            // buttonReturn
+            // 
+            this.buttonReturn.Enabled = false;
+            this.buttonReturn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonReturn.Location = new System.Drawing.Point(307, 357);
+            this.buttonReturn.Name = "buttonReturn";
+            this.buttonReturn.Size = new System.Drawing.Size(84, 29);
+            this.buttonReturn.TabIndex = 20;
+            this.buttonReturn.Text = "Retur";
+            this.buttonReturn.UseVisualStyleBackColor = true;
+            this.buttonReturn.Click += new System.EventHandler(this.buttonReturn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -438,6 +476,7 @@ namespace Laboration4
             this.Load += new System.EventHandler(this.Form1_Load);
             this.TabControl.ResumeLayout(false);
             this.tabStore.ResumeLayout(false);
+            this.tabStore.PerformLayout();
             this.tabStorage.ResumeLayout(false);
             this.tabStorage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
@@ -480,6 +519,9 @@ namespace Laboration4
         private System.Windows.Forms.Button buttonNewProduct;
         private System.Windows.Forms.ListBox listBoxShoppingCart;
         private System.Windows.Forms.Button buttonReturnProduct;
+        private System.Windows.Forms.Button buttonSearch;
+        private System.Windows.Forms.TextBox textBoxSearch;
+        private System.Windows.Forms.Button buttonReturn;
     }
 }
 

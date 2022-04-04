@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Laboration4.Backend
 {
@@ -8,6 +9,7 @@ namespace Laboration4.Backend
     {
         List<Product> products;
         readonly string productsCsvFile = $"{Directory.GetCurrentDirectory()}\\Csv\\Product.csv";
+        string latestPurchase = "";
 
         public Storage()
         {
@@ -15,9 +17,21 @@ namespace Laboration4.Backend
             //Läsa in producter från csv fil
             ReadAllProducts();
         }
-        public List<Product> GetAllProducts()
+        public List<Product> GetAllProducts(string filter = "")
         {
-            return products;
+            if (string.IsNullOrWhiteSpace(filter))
+            {
+                return products;
+            }
+            else
+            {
+                return products.Where(product => 
+                    product.Name.Contains(filter) || 
+                    product.Id.ToString().Contains(filter) ||
+                    product.Author.Contains(filter)
+                ).ToList(); 
+            }
+
         }
         public List<Product> GetAllReservedProducts()
         {
@@ -151,15 +165,22 @@ namespace Laboration4.Backend
 
         public void CheckoutProducts()
         {
-            foreach(var product in products)
+            latestPurchase = "KVITTO: \n";
+            foreach (var product in products)
             {
-                if(product.Reserved > 0)
+                if (product.Reserved > 0)
                 {
+                    latestPurchase += $"{product.Name} Antal:{product.Reserved} Pris:{product.Price * product.Reserved}\n";
                     product.Stock = product.Stock - product.Reserved;
                     product.Reserved = 0;
                 }
             }
             StoreAllProducts();
+        }
+
+        public string GetLatestPurchase()
+        {
+            return latestPurchase;
         }
     }
 }

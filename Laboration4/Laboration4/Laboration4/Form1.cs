@@ -1,5 +1,7 @@
 ﻿using Laboration4.Backend;
 using System;
+using System.Drawing;
+using System.Drawing.Printing;
 using System.Windows.Forms;
 
 namespace Laboration4
@@ -8,13 +10,20 @@ namespace Laboration4
     {
         //Global variables
         Storage storage;
-        //CashRegister cashRegister;
         Product selectedProduct;
+        PrintDocument printDocument = new PrintDocument();
+        PrintDialog printDialog = new PrintDialog();
         public Form1()
         {
             InitializeComponent();
             storage = new Storage();
-            //cashRegister = new CashRegister();
+            printDocument.PrintPage += PrintDocument_PrintPage;
+        }
+
+        private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            string reciptText = storage.GetLatestPurchase();
+            e.Graphics.DrawString(reciptText, new Font("Arial", 20, FontStyle.Regular), Brushes.Black, 20, 20);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -24,16 +33,26 @@ namespace Laboration4
 
         private void DisplayProductsFromStorage()
         {
-            var listProducts = storage.GetAllProducts();
+            //Hämtar produkter och visar i lager
+            var listStorageProducts = storage.GetAllProducts();
             listBoxStorage.Items.Clear();
-            listOfProducts.Items.Clear();
             listBoxStorage.DisplayMember = "DisplayInStorage";
-            listOfProducts.DisplayMember = "DisplayListOfProducts";
-            foreach (Product product in listProducts)
+            foreach (Product product in listStorageProducts)
             {
                 listBoxStorage.Items.Add(product);
+            }
+
+            //Hämtar produkter och visar i butik
+            var listStoreProducts = storage.GetAllProducts(textBoxSearch.Text);
+            textBoxSearch.Text = "";
+            listOfProducts.Items.Clear();
+            listOfProducts.DisplayMember = "DisplayListOfProducts";
+            foreach (Product product in listStoreProducts)
+            {
                 listOfProducts.Items.Add(product);
             }
+
+            //Hämtar produkter som är reserverade och visar de i shoppinglistan
             var listReservedProducts = storage.GetAllReservedProducts();
             listBoxShoppingCart.Items.Clear();
             listBoxShoppingCart.DisplayMember = "DisplayReservedProducts";
@@ -366,7 +385,7 @@ namespace Laboration4
             selectedProduct = (Product)listOfProducts.SelectedItem;
             if (selectedProduct != null)
             {
-
+                buttonReturn.Enabled = true;
                 if (selectedProduct.EligibleToBuy())
                 {
                     buttonBuyProduct.Enabled = true;
@@ -380,8 +399,10 @@ namespace Laboration4
         private void buttonBuyProduct_Click(object sender, EventArgs e)
         {
             buttonBuyProduct.Enabled = false;
+
             if (selectedProduct != null)
             {
+                buttonBuy.Enabled = true;
                 selectedProduct.Reserve();
                 DisplayProductsFromStorage();
             }
@@ -405,14 +426,48 @@ namespace Laboration4
             if (selectedProduct != null)
             {
                 selectedProduct.UnReserve();
+                if (storage.GetAllReservedProducts().Count == 0)
+                {
+                    buttonBuy.Enabled = false;
+                }
                 DisplayProductsFromStorage();
             }
         }
 
         private void buttonBuy_Click(object sender, EventArgs e)
         {
+            //Köper produkterna
             storage.CheckoutProducts();
+
+            //print out recipt
+            DialogResult dialogResult = MessageBox.Show("", "Vill du skriva ut kvitto?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                printDialog.Document = printDocument;
+                if (printDialog.ShowDialog() == DialogResult.OK)
+                {
+                    printDocument.Print();
+                }
+            }
+            //Visar ut en updaterad lista på produkterna och hur många som finns av varje
             DisplayProductsFromStorage();
+            buttonBuy.Enabled = false;
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            DisplayProductsFromStorage();
+        }
+
+        private void buttonReturn_Click(object sender, EventArgs e)
+        {
+            selectedProduct = (Product)listOfProducts.SelectedItem;
+            buttonReturn.Enabled = false;
+            if (selectedProduct != null)
+            {
+                selectedProduct.Return();
+                DisplayProductsFromStorage();
+            }   
         }
     }
 }
