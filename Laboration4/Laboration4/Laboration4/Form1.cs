@@ -11,6 +11,8 @@ namespace Laboration4
         //Global variables
         Storage storage;
         Product selectedProduct;
+
+        //https://stackoverflow.com/questions/18547862/print-textbox-contents-in-c-sharp
         PrintDocument printDocument = new PrintDocument();
         PrintDialog printDialog = new PrintDialog();
         public Form1()
@@ -19,18 +21,20 @@ namespace Laboration4
             storage = new Storage();
             printDocument.PrintPage += PrintDocument_PrintPage;
         }
-
+        //Skapar en text som har med det du senast köpt
         private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
         {
             string reciptText = storage.GetLatestPurchase();
             e.Graphics.DrawString(reciptText, new Font("Arial", 20, FontStyle.Regular), Brushes.Black, 20, 20);
         }
 
+        //Anropar funktionen som visar upp produkterna som är lagrade i lagret när gränssnittet laddar in
         private void Form1_Load(object sender, EventArgs e)
         {
             DisplayProductsFromStorage();
         }
 
+        //Funktion som visar upp produkterna från lagret
         private void DisplayProductsFromStorage()
         {
             //Hämtar produkter och visar i lager
@@ -62,6 +66,7 @@ namespace Laboration4
             }
         }
 
+        //Lagrar produkter till lagret om man stänger ner programmet
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
@@ -70,6 +75,7 @@ namespace Laboration4
             }
         }
 
+        //Händer när man klickar på en produkt i listBoxStorage
         private void listBoxStorage_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedProduct = (Product)listBoxStorage.SelectedItem;
@@ -80,6 +86,7 @@ namespace Laboration4
             }
         }
 
+        //Rensar alla produkter i input boxarna
         private void ClearProductInput()
         {
             textBoxId.Text = "";
@@ -97,6 +104,7 @@ namespace Laboration4
             selectedProduct = null;
         }
 
+        //Fyller i alla produkter i input boxarna
         private void FillProductInput(Product product)
         {
             //id,namn,pris,författare,genre,format,språk,plattform,speltid,antal
@@ -114,6 +122,7 @@ namespace Laboration4
             buttonStoreProduct.Enabled = true;
         }
 
+        //Kollar vad som ligger i input boxarna och bygger upp en ny produkt
         private Product BuildProductFromInput()
         {
             Product product = new Product();
@@ -169,6 +178,7 @@ namespace Laboration4
             return product;
         }
 
+        //Knapp för att ta bort en produkt
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             selectedProduct = (Product)listBoxStorage.SelectedItem;
@@ -330,6 +340,7 @@ namespace Laboration4
         }
         #endregion
 
+        //Knapp för att uppdatera och lagra en ny produkt
         private void buttonUpdateProduct_Click(object sender, EventArgs e)
         {
             if (selectedProduct == null)
@@ -373,6 +384,7 @@ namespace Laboration4
             }
         }
 
+        //Knapp som rensar input boxar så att man kan skriva in saker i input boxarna för en ny produkt
         private void buttonNewProduct_Click(object sender, EventArgs e)
         {
             DisplayProductsFromStorage();
@@ -380,6 +392,7 @@ namespace Laboration4
             buttonNewProduct.Enabled = false;
         }
 
+        //Händer när man klickar på en produkt i listOfProducts
         private void listOfProducts_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedProduct = (Product)listOfProducts.SelectedItem;
@@ -396,6 +409,8 @@ namespace Laboration4
                 }
             }
         }
+
+        //Knapp för att välja en produkt, flyttar över en produkt till listBoxShoppingCart
         private void buttonBuyProduct_Click(object sender, EventArgs e)
         {
             buttonBuyProduct.Enabled = false;
@@ -408,6 +423,7 @@ namespace Laboration4
             }
         }
 
+        //Händer när man klickar på en produkt i listBoxShoppingCart
         private void listBoxShoppingCart_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedProduct = (Product)listBoxShoppingCart.SelectedItem;
@@ -420,6 +436,8 @@ namespace Laboration4
                 buttonReturnProduct.Enabled = false;
             }
         }
+
+        //Knapp för att ta tillbaka en produkt som man köpt
         private void buttonReturnProduct_Click(object sender, EventArgs e)
         {
             buttonReturnProduct.Enabled = false;
@@ -434,6 +452,7 @@ namespace Laboration4
             }
         }
 
+        //Knapp för att köpa produkterna som valts
         private void buttonBuy_Click(object sender, EventArgs e)
         {
             //Köper produkterna
@@ -454,11 +473,13 @@ namespace Laboration4
             buttonBuy.Enabled = false;
         }
 
+        //Knapp som söker efter det som är inskrivet i sökfältet
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             DisplayProductsFromStorage();
         }
 
+        //Knapp som tar tillbaka en vald produkt, flyttar över en produkt till listOfProducts
         private void buttonReturn_Click(object sender, EventArgs e)
         {
             selectedProduct = (Product)listOfProducts.SelectedItem;

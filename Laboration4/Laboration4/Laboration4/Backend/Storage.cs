@@ -17,6 +17,8 @@ namespace Laboration4.Backend
             //Läsa in producter från csv fil
             ReadAllProducts();
         }
+
+        //Returnerar en lista av produkter. Om man skriver in ett en egenskap för en produkt kommer den filtrera
         public List<Product> GetAllProducts(string filter = "")
         {
             if (string.IsNullOrWhiteSpace(filter))
@@ -26,19 +28,23 @@ namespace Laboration4.Backend
             else
             {
                 return products.Where(product => 
-                    product.Name.Contains(filter) || 
+                    product.Name.ToLower().Contains(filter.ToLower()) || 
                     product.Id.ToString().Contains(filter) ||
-                    product.Author.Contains(filter)
+                    product.Author.ToLower().Contains(filter.ToLower())
                 ).ToList(); 
             }
 
         }
+
+        //Får alla reserverad produkter och skickar returnerar dem
         public List<Product> GetAllReservedProducts()
         {
             //https://stackoverflow.com/questions/54726354/get-all-objects-that-have-an-object-that-matches-a-string
             var reservedProducts = products.FindAll(product => product.Reserved > 0);
             return reservedProducts;
         }
+
+        //Lagrar alla produkter till CSV filen
         public void StoreAllProducts()
         {
             //id,namn,pris,författare,genre,format,språk,plattform,speltid,antal
@@ -51,12 +57,13 @@ namespace Laboration4.Backend
             }
             File.WriteAllText(productsCsvFile, productsInCsvFormat);
         }
+
+        //Läser in alla produkter
         private void ReadAllProducts()
         {
             //Läs produkter från csv fil
             //Lägg till produkterna i product variabeln
             int counter = 0;
-            // Read the file and display it line by line.  
             foreach (string line in File.ReadLines(productsCsvFile))
             {
                 if (counter == 0)
@@ -86,11 +93,13 @@ namespace Laboration4.Backend
             }
         }
 
+        //Lägger till en produkt
         public void AddProduct(Product product)
         {
             products.Add(product);
         }
 
+        //Får produktens index med hjälp av dens id
         public int GetProductIndexById(int productId)
         {
             int noProductIndexFound = -1;
@@ -113,6 +122,7 @@ namespace Laboration4.Backend
             return noProductIndexFound;
         }
 
+        //Tar bort en produkt
         public void DeleteProduct(Product product)
         {
             int productIndex = GetProductIndexById(product.Id);
@@ -123,6 +133,7 @@ namespace Laboration4.Backend
             }
         }
 
+        //Uppdaterar alla produkter
         public void UpdateProduct(Product originalProduct, Product updatedProduct)
         {
             originalProduct.Id = updatedProduct.Id;
@@ -133,16 +144,10 @@ namespace Laboration4.Backend
             originalProduct.Format = updatedProduct.Format;
             originalProduct.Language = updatedProduct.Language;
             originalProduct.Platform = updatedProduct.Platform;
-            originalProduct.Stock = updatedProduct.Stock;
-
-            //int productIndex = GetProductIndexById(originalProduct.Id);
-
-            //if (productIndex >= 0)
-            //{
-            //    products[productIndex] = updatedProduct;
-            //}   
+            originalProduct.Stock = updatedProduct.Stock;  
         }
 
+        //Kollar om produkt ID finns sedan innan
         public bool ProductIdExist(int productId)
         {
             if (products == null || products.Count == 0)
@@ -163,6 +168,7 @@ namespace Laboration4.Backend
             }
         }
 
+        //Checkar ut och skriver upp en sträng med det som har köpts
         public void CheckoutProducts()
         {
             latestPurchase = "KVITTO: \n";
@@ -178,6 +184,7 @@ namespace Laboration4.Backend
             StoreAllProducts();
         }
 
+        //Skickar tillbaka den senaste köpet
         public string GetLatestPurchase()
         {
             return latestPurchase;

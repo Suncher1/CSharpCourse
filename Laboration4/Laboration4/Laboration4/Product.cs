@@ -73,10 +73,6 @@ namespace Laboration4
         {
             get
             {
-                //if(!string.IsNullOrEmpty(Gametime))
-                //{
-                //    return $"{Id} {Name}, {Gametime} min ({Stock - Reserved})";
-                //}
                 return $"{Name.Truncate(28)} ({Stock - Reserved})";
             }
         }
@@ -89,6 +85,7 @@ namespace Laboration4
         }
         #endregion
 
+        //Kollar om man kan köpa eller inte beroende på hur många som finns och hur många som valts
         public bool EligibleToBuy()
         {
             if (Stock > Reserved)
@@ -100,14 +97,20 @@ namespace Laboration4
                 return false;
             }
         }
+
+        //Ökar antalet på variablen reserved med ett
         public void Reserve()
         {
             Reserved++;
         }
+
+        //Minskar antalet på variablen reserved med ett
         public void UnReserve()
         {
             Reserved--;
         }
+
+        //Ökar antalet på variabeln stock med ett
         public void Return()
         {
             Stock++;
