@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml;
 
 namespace Laboration4.Backend
 {
@@ -181,6 +182,49 @@ namespace Laboration4.Backend
         public string GetLatestPurchase()
         {
             return latestPurchase;
+        }
+
+        public bool SyncProductsFromRemoteStorage()
+        {
+            var productsFromXmlFile = new List<Product>();
+
+            //https://stackoverflow.com/questions/5102865/asp-net-load-xml-file-from-url
+            //Kontakta api och hämta alla produkter
+            XmlDocument xdoc = new XmlDocument();//xml doc used for xml parsing
+
+            xdoc.Load(
+                "https://hex.cse.kau.se/~jonavest/csharp-api/"
+                );//loading XML in xml doc
+
+            XmlNodeList xNodelst = xdoc.DocumentElement.SelectNodes("products/*");//reading node so that we can traverse thorugh the XML
+
+            string content = "";
+
+            foreach (XmlNode xNode in xNodelst)//traversing XML 
+            {
+                content += "read";
+                //Uppräta en ny produkt 
+                //Läs värden från xml noden och lägra i produkten (Se exempel uppe på rad 55 i funktionen)
+                //Lägg in produkten i products från xml filen rad 189
+            }
+
+
+
+
+
+
+            //Loppa igenom våra produkter som finns lokalt
+            foreach (Product product in products)
+            {
+                if(product.Id == 3)
+                {
+                    product.Stock += 5;
+                }
+            }
+            //För varje produkt så ska man läsa ut id, pris och lagerstatus
+            //Om det är skillnad på pris eller lagerstatus så ska det uppdateras
+            //Om det gått bra returneras true annars false
+            return true;
         }
     }
 }

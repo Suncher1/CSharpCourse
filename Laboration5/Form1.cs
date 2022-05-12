@@ -469,5 +469,11 @@ namespace Laboration4
                 DisplayProductsFromStorage();
             }   
         }
+
+        private void buttonSyncRemoteStorage_Click(object sender, EventArgs e)
+        {
+            storage.SyncProductsFromRemoteStorage();
+            DisplayProductsFromStorage();
+        }
     }
 }

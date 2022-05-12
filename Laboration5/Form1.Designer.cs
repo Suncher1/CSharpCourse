@@ -33,6 +33,9 @@ namespace Laboration4
             this.listOfProducts = new System.Windows.Forms.ListBox();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.tabStore = new System.Windows.Forms.TabPage();
+            this.buttonReturn = new System.Windows.Forms.Button();
+            this.buttonSearch = new System.Windows.Forms.Button();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.buttonReturnProduct = new System.Windows.Forms.Button();
             this.listBoxShoppingCart = new System.Windows.Forms.ListBox();
             this.buttonBuyProduct = new System.Windows.Forms.Button();
@@ -63,9 +66,7 @@ namespace Laboration4
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxStorage = new System.Windows.Forms.ListBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.textBoxSearch = new System.Windows.Forms.TextBox();
-            this.buttonSearch = new System.Windows.Forms.Button();
-            this.buttonReturn = new System.Windows.Forms.Button();
+            this.buttonSyncRemoteStorage = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.tabStore.SuspendLayout();
             this.tabStorage.SuspendLayout();
@@ -111,6 +112,37 @@ namespace Laboration4
             this.tabStore.TabIndex = 0;
             this.tabStore.Text = "Butik";
             this.tabStore.UseVisualStyleBackColor = true;
+            // 
+            // buttonReturn
+            // 
+            this.buttonReturn.Enabled = false;
+            this.buttonReturn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonReturn.Location = new System.Drawing.Point(307, 357);
+            this.buttonReturn.Name = "buttonReturn";
+            this.buttonReturn.Size = new System.Drawing.Size(84, 29);
+            this.buttonReturn.TabIndex = 20;
+            this.buttonReturn.Text = "Retur";
+            this.buttonReturn.UseVisualStyleBackColor = true;
+            this.buttonReturn.Click += new System.EventHandler(this.buttonReturn_Click);
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSearch.Location = new System.Drawing.Point(217, 6);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(84, 29);
+            this.buttonSearch.TabIndex = 19;
+            this.buttonSearch.Text = "Sök";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+            // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.Location = new System.Drawing.Point(8, 6);
+            this.textBoxSearch.Multiline = true;
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(203, 29);
+            this.textBoxSearch.TabIndex = 18;
             // 
             // buttonReturnProduct
             // 
@@ -161,6 +193,7 @@ namespace Laboration4
             // 
             // tabStorage
             // 
+            this.tabStorage.Controls.Add(this.buttonSyncRemoteStorage);
             this.tabStorage.Controls.Add(this.buttonNewProduct);
             this.tabStorage.Controls.Add(this.textBoxStock);
             this.tabStorage.Controls.Add(this.textBoxGametime);
@@ -425,7 +458,7 @@ namespace Laboration4
             this.listBoxStorage.ItemHeight = 24;
             this.listBoxStorage.Location = new System.Drawing.Point(8, 6);
             this.listBoxStorage.Name = "listBoxStorage";
-            this.listBoxStorage.Size = new System.Drawing.Size(293, 388);
+            this.listBoxStorage.Size = new System.Drawing.Size(293, 340);
             this.listBoxStorage.TabIndex = 1;
             this.listBoxStorage.SelectedIndexChanged += new System.EventHandler(this.listBoxStorage_SelectedIndexChanged);
             // 
@@ -433,36 +466,16 @@ namespace Laboration4
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // textBoxSearch
+            // buttonSyncRemoteStorage
             // 
-            this.textBoxSearch.Location = new System.Drawing.Point(8, 6);
-            this.textBoxSearch.Multiline = true;
-            this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(203, 29);
-            this.textBoxSearch.TabIndex = 18;
-            // 
-            // buttonSearch
-            // 
-            this.buttonSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSearch.Location = new System.Drawing.Point(217, 6);
-            this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(84, 29);
-            this.buttonSearch.TabIndex = 19;
-            this.buttonSearch.Text = "Sök";
-            this.buttonSearch.UseVisualStyleBackColor = true;
-            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
-            // 
-            // buttonReturn
-            // 
-            this.buttonReturn.Enabled = false;
-            this.buttonReturn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonReturn.Location = new System.Drawing.Point(307, 357);
-            this.buttonReturn.Name = "buttonReturn";
-            this.buttonReturn.Size = new System.Drawing.Size(84, 29);
-            this.buttonReturn.TabIndex = 20;
-            this.buttonReturn.Text = "Retur";
-            this.buttonReturn.UseVisualStyleBackColor = true;
-            this.buttonReturn.Click += new System.EventHandler(this.buttonReturn_Click);
+            this.buttonSyncRemoteStorage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSyncRemoteStorage.Location = new System.Drawing.Point(100, 352);
+            this.buttonSyncRemoteStorage.Name = "buttonSyncRemoteStorage";
+            this.buttonSyncRemoteStorage.Size = new System.Drawing.Size(105, 43);
+            this.buttonSyncRemoteStorage.TabIndex = 25;
+            this.buttonSyncRemoteStorage.Text = "Hämta Från Central Lager";
+            this.buttonSyncRemoteStorage.UseVisualStyleBackColor = true;
+            this.buttonSyncRemoteStorage.Click += new System.EventHandler(this.buttonSyncRemoteStorage_Click);
             // 
             // Form1
             // 
@@ -522,6 +535,7 @@ namespace Laboration4
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Button buttonReturn;
+        private System.Windows.Forms.Button buttonSyncRemoteStorage;
     }
 }
 
