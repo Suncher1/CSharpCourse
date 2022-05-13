@@ -477,5 +477,19 @@ namespace Laboration4
             }
             DisplayProductsFromStorage(); 
         }
+
+        private void buttonSyncStorageToRemote_Click(object sender, EventArgs e)
+        {
+            var result = storage.SyncProductsToRemoteStorage();
+            if (!result)
+            {
+                MessageBox.Show("Det gick inte att sända lagerstatus på alla produkter");
+            }
+        }
+
+        private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

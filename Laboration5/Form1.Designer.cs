@@ -95,6 +95,7 @@ namespace Laboration4
             this.TabControl.SelectedIndex = 0;
             this.TabControl.Size = new System.Drawing.Size(859, 450);
             this.TabControl.TabIndex = 1;
+            this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             // 
             // tabStore
             // 
@@ -488,6 +489,7 @@ namespace Laboration4
             this.buttonSyncStorageToRemote.TabIndex = 26;
             this.buttonSyncStorageToRemote.Text = "Uppdatera Central Lager";
             this.buttonSyncStorageToRemote.UseVisualStyleBackColor = true;
+            this.buttonSyncStorageToRemote.Click += new System.EventHandler(this.buttonSyncStorageToRemote_Click);
             // 
             // Form1
             // 

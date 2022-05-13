@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Xml;
 
 namespace Laboration4.Backend
@@ -257,6 +259,7 @@ namespace Laboration4.Backend
 
         public void CheckoutProducts()
         {
+            SyncProductsFromRemoteStorage();
             latestPurchase = "KVITTO: \n";
             foreach (var product in products)
             {
@@ -265,8 +268,11 @@ namespace Laboration4.Backend
                     latestPurchase += $"{product.Name} Antal:{product.Reserved} Pris:{product.Price * product.Reserved}\n";
                     product.Stock = product.Stock - product.Reserved;
                     product.Reserved = 0;
+                    //Anropa centrallagret och uppdater produkten
+                    SyncOneProductToRemoteStorage(product.Id, product.Stock);
                 }
             }
+            SyncProductsFromRemoteStorage();
             StoreAllProducts();
         }
 
@@ -277,24 +283,62 @@ namespace Laboration4.Backend
 
         public bool SyncProductsFromRemoteStorage()
         {
-                var remoteProducts = ReadAllProductsFromRemoteStorage();
-                if(remoteProducts == null || remoteProducts.Count == 0)
+            var remoteProducts = ReadAllProductsFromRemoteStorage();
+            if (remoteProducts == null || remoteProducts.Count == 0)
+            {
+                return false;
+            }
+            //Loppa igenom våra produkter som finns lokalt
+            foreach (Product product in products)
+            {
+                //Hämtar produkten med samma id på den lokala proudukten som den externa produkten
+                var remoteProduct = remoteProducts.Where(p => p.Id == product.Id).Select(p => p).FirstOrDefault();
+
+                if (remoteProduct != null)
                 {
-                    return false;
+                    product.Price = remoteProduct.Price;
+                    product.Stock = remoteProduct.Stock;
                 }
-                //Loppa igenom våra produkter som finns lokalt
+            }
+            return true;
+        }
+        public bool SyncProductsToRemoteStorage()
+        {
+            try
+            {
                 foreach (Product product in products)
                 {
-                    //Hämtar produkten med samma id på den lokala proudukten som den externa produkten
-                    var remoteProduct = remoteProducts.Where(p => p.Id == product.Id).Select(p => p).FirstOrDefault();
-
-                    if (remoteProduct != null)
-                    {
-                        product.Price = remoteProduct.Price;
-                        product.Stock = remoteProduct.Stock;
-                    }
+                    SyncOneProductToRemoteStorage(product.Id, product.Stock);
+                    
+                    //var updateUrl = $"https://hex.cse.kau.se/~jonavest/csharp-api/?action=update&id={product.Id}&stock={product.Stock}";
+                    ////https://www.codegrepper.com/code-examples/csharp/c%23+http+request
+                    ////https://zetcode.com/csharp/httpclient/
+                    //var client = new HttpClient();
+                    //client.GetAsync(updateUrl).Wait();
                 }
                 return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool SyncOneProductToRemoteStorage(int id, int stock)
+        {
+            try
+            {
+                var updateUrl = $"https://hex.cse.kau.se/~jonavest/csharp-api/?action=update&id={id}&stock={stock}";
+                //https://www.codegrepper.com/code-examples/csharp/c%23+http+request
+                //https://zetcode.com/csharp/httpclient/
+                var client = new HttpClient();
+                client.GetAsync(updateUrl).Wait();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
