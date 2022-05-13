@@ -1,15 +1,16 @@
 ﻿id,namn,pris,författare,genre,format,språk,plattform,speltid,antal
-1,Bello Gallico et Civili,449,Julius Caesar,Historia,Inbunden,Latin,,,1
-2,How to Read a Book,149,Mortimer J. Adler,Kursliteratur,Pocket,,,,1
-3,Moby Dick,49,Herman Melville,Äventyr,Pocket,,,,2
-4,Great Gatsby,79,F. Scott Fitzgerald,Noir,E-Bok,,,,3
-5,House of Leaves,49,Mark Z. Danielewski,Skräck,,,,,1
-6,Elden Ring,599,,,,,Playstation 5,,12
-7,Demon's Souls,499,,,,,Playstation 5,,50
-8,Microsoft Flight Simulator,99,,,,,PC,,40
-9,Planescape Torment,399,,,,,PC,,67
-10,Nyckeln till frihet,99,,,DVD,,,142,43
-11,Gudfadern,99,,,DVD,,,152,5
-12,Konungens återkomst,199,,,Blu-Ray,,,154,122
-13,Pulp fiction,199,,,Blu-Ray,,,,6
-14,Schindlers list,99,,,DVD,,,,76
+1,Bello1 Gallico et Civili,349,,History,Bound,Latin,,0,22
+2,How to Read a Book,29,,Study materials,Pocket,,,0,19
+3,Moby Dick,19,,Adventure,Pocket,,,0,16
+4,Great Gatspy,29,,Noir,E-Book,,,0,30
+5,House of Leaves,59,,Horror,,,,0,31
+6,Elden Ring,399,,,,,Playstation 5,0,39
+7,Demon's Souls,459,,,,,Playstation 5,0,13
+8,Microsoft Flight Simulator,399,,,,,PC,0,1
+9,Planescape Torment,199,,,,,PC,0,48
+10,Disco Elysium,349,,,,,PC,0,41
+11,Shawshank Redemption,99,,,DVD,,,142,0
+12,The Godfather,99,,,DVD,,,142,33
+13,Return of the King,259,,,Blu-Ray,,,142,28
+14,Pulp Fiction,199,,,Blu-Ray,,,0,49
+15,Schindlers List,99,,,DVD,,,0,39

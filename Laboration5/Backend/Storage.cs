@@ -26,11 +26,11 @@ namespace Laboration4.Backend
             }
             else
             {
-                return products.Where(product => 
-                    product.Name.Contains(filter) || 
+                return products.Where(product =>
+                    product.Name.Contains(filter) ||
                     product.Id.ToString().Contains(filter) ||
                     product.Author.Contains(filter)
-                ).ToList(); 
+                ).ToList();
             }
 
         }
@@ -48,12 +48,13 @@ namespace Laboration4.Backend
             {
                 productsInCsvFormat += $"{product.Id},{product.Name},{product.Price}," +
                     $"{product.Author},{product.Genre},{product.Format},{product.Language}," +
-                    $"{product.Platform},{product.Gametime},{product.Stock}\n";
+                    $"{product.Platform},{product.Playtime},{product.Stock}\n";
             }
             File.WriteAllText(productsCsvFile, productsInCsvFormat);
         }
         private void ReadAllProducts()
         {
+            //products = ReadAllProductsFromRemoteStorage();
             //Läs produkter från csv fil
             //Lägg till produkterna i product variabeln
             int counter = 0;
@@ -77,14 +78,87 @@ namespace Laboration4.Backend
                 product.Format = dataValues[5];
                 product.Language = dataValues[6];
                 product.Platform = dataValues[7];
-                product.Gametime = dataValues[8];
+                if(!string.IsNullOrEmpty(dataValues[8]))
+                {
+                    product.Playtime = Int32.Parse(dataValues[8]);
+                } 
+                else
+                {
+                    product.Playtime = 0;
+                }
                 product.Stock = Int32.Parse(dataValues[9]);
                 product.Reserved = 0;
                 products.Add(product);
-
-                System.Console.WriteLine(line);
                 counter++;
             }
+        }
+        private List<Product> ReadAllProductsFromRemoteStorage()
+        {
+            var productsFromXml = new List<Product>();
+
+            //https://stackoverflow.com/questions/5102865/asp-net-load-xml-file-from-url
+            //Kontakta api och hämta alla produkter
+            XmlDocument xdoc = new XmlDocument();//xml doc used for xml parsing
+
+            xdoc.Load(
+                "https://hex.cse.kau.se/~jonavest/csharp-api/"
+                );//loading XML in xml doc
+
+            XmlNodeList xNodeProductList = xdoc.DocumentElement.SelectNodes("products/*");//reading node so that we can traverse thorugh the XML
+
+            foreach (XmlNode xNodeProduct in xNodeProductList)//traversing XML 
+            {
+                
+                Product product = new Product();
+                product.Playtime = 0;
+                product.Reserved = 0;
+
+                foreach (XmlNode xNodeProductInfo in xNodeProduct.ChildNodes)
+                {
+                    if (xNodeProductInfo.Name == "id")
+                    {
+                        product.Id = Int32.Parse(xNodeProductInfo.InnerText);
+                    }
+                    if (xNodeProductInfo.Name == "name")
+                    {
+                        product.Name = xNodeProductInfo.InnerText;
+                    }
+                    if (xNodeProductInfo.Name == "price")
+                    {
+                        product.Price = Int32.Parse(xNodeProductInfo.InnerText);
+                    }
+                    if (xNodeProductInfo.Name == "author")
+                    {
+                        product.Author = xNodeProductInfo.InnerText;
+                    }
+                    if (xNodeProductInfo.Name == "genre")
+                    {
+                        product.Genre = xNodeProductInfo.InnerText;
+                    }
+                    if (xNodeProductInfo.Name == "format")
+                    {
+                        product.Format = xNodeProductInfo.InnerText;
+                    }
+                    if (xNodeProductInfo.Name == "language")
+                    {
+                        product.Language = xNodeProductInfo.InnerText;
+                    }
+                    if (xNodeProductInfo.Name == "platform")
+                    {
+                        product.Platform = xNodeProductInfo.InnerText;
+                    }
+                    if (xNodeProductInfo.Name == "playtime")
+                    {
+                        product.Playtime = Int32.Parse(xNodeProductInfo.InnerText);
+                    }
+                    if (xNodeProductInfo.Name == "stock")
+                    {
+                        product.Stock = Int32.Parse(xNodeProductInfo.InnerText);
+                    }              
+                }
+                productsFromXml.Add(product);
+            }
+            return productsFromXml;
         }
 
         public void AddProduct(Product product)
@@ -186,45 +260,28 @@ namespace Laboration4.Backend
 
         public bool SyncProductsFromRemoteStorage()
         {
-            var productsFromXmlFile = new List<Product>();
-
-            //https://stackoverflow.com/questions/5102865/asp-net-load-xml-file-from-url
-            //Kontakta api och hämta alla produkter
-            XmlDocument xdoc = new XmlDocument();//xml doc used for xml parsing
-
-            xdoc.Load(
-                "https://hex.cse.kau.se/~jonavest/csharp-api/"
-                );//loading XML in xml doc
-
-            XmlNodeList xNodelst = xdoc.DocumentElement.SelectNodes("products/*");//reading node so that we can traverse thorugh the XML
-
-            string content = "";
-
-            foreach (XmlNode xNode in xNodelst)//traversing XML 
+            try
             {
-                content += "read";
-                //Uppräta en ny produkt 
-                //Läs värden från xml noden och lägra i produkten (Se exempel uppe på rad 55 i funktionen)
-                //Lägg in produkten i products från xml filen rad 189
-            }
-
-
-
-
-
-
-            //Loppa igenom våra produkter som finns lokalt
-            foreach (Product product in products)
-            {
-                if(product.Id == 3)
+                var remoteProducts = ReadAllProductsFromRemoteStorage();
+                //Loppa igenom våra produkter som finns lokalt
+                foreach (Product product in products)
                 {
-                    product.Stock += 5;
+                    //Hämtar produkten med samma id på den lokala proudukten som den externa produkten
+                    var remoteProduct = remoteProducts.Where(p => p.Id == product.Id).Select(p => p).FirstOrDefault();
+
+                    if (remoteProduct != null)
+                    {
+                        product.Price = remoteProduct.Price;
+                        product.Stock = remoteProduct.Stock;
+                    }
                 }
+                return true;
             }
-            //För varje produkt så ska man läsa ut id, pris och lagerstatus
-            //Om det är skillnad på pris eller lagerstatus så ska det uppdateras
-            //Om det gått bra returneras true annars false
-            return true;
+            catch
+            {
+                return false;
+            }
+
         }
     }
 }

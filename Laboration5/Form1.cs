@@ -108,7 +108,14 @@ namespace Laboration4
             textBoxFormat.Text = product.Format;
             textBoxLanguage.Text = product.Language;
             textBoxPlatform.Text = product.Platform;
-            textBoxGametime.Text = product.Gametime.ToString();
+            if(product.Playtime > 0)
+            {
+                textBoxGametime.Text = product.Playtime.ToString();
+            }
+            else
+            {
+                textBoxGametime.Text = "";
+            }
             textBoxStock.Text = product.Stock.ToString();
             buttonDelete.Enabled = true;
             buttonStoreProduct.Enabled = true;
@@ -145,17 +152,16 @@ namespace Laboration4
             product.Format = textBoxFormat.Text;
             product.Language = textBoxLanguage.Text;
             product.Platform = textBoxPlatform.Text;
-            product.Gametime = textBoxGametime.Text;
 
-            //var gametimeParsed = Int32.TryParse(textBoxGametime.Text, out int gametimeResult);
-            //if (gametimeParsed)
-            //{
-            //    product.Gametime = gametimeResult;
-            //}
-            //else
-            //{
-            //    product.Gametime = 0;
-            //}
+            var playtimeParsed = Int32.TryParse(textBoxGametime.Text, out int playtimeResult);
+            if (playtimeParsed)
+            {
+                product.Playtime = playtimeResult;
+            }
+            else
+            {
+                product.Playtime = 0;
+            }
 
             var stockParsed = Int32.TryParse(textBoxStock.Text, out int stockResult);
             if (stockParsed)
@@ -282,13 +288,13 @@ namespace Laboration4
                 var isNumeric = int.TryParse(textBoxGametime.Text, out int n);
                 if (!isNumeric)
                 {
-                    errorMsg = "Antal måste vara ett heltal!";
+                    errorMsg = "Speltid måste vara ett heltal!";
                 }
                 else
                 {
                     if (n < 0)
                     {
-                        errorMsg = "Antal måste vara minst 0!";
+                        errorMsg = "Speltid måste vara minst 0!";
                     }
                 }
                 if (errorMsg != "")

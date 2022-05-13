@@ -46,7 +46,7 @@ namespace Laboration4
             get;
             set;
         }
-        public string Gametime
+        public int Playtime
         {
             get;
             set;
@@ -77,7 +77,7 @@ namespace Laboration4
                 //{
                 //    return $"{Id} {Name}, {Gametime} min ({Stock - Reserved})";
                 //}
-                return $"{Name.Truncate(28)} ({Stock - Reserved})";
+                return $"{Name.Truncate(28)} ({Stock - Reserved}) {Price} kr";
             }
         }
         public string DisplayReservedProducts

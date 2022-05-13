@@ -41,6 +41,7 @@ namespace Laboration4
             this.buttonBuyProduct = new System.Windows.Forms.Button();
             this.buttonBuy = new System.Windows.Forms.Button();
             this.tabStorage = new System.Windows.Forms.TabPage();
+            this.buttonSyncRemoteStorage = new System.Windows.Forms.Button();
             this.buttonNewProduct = new System.Windows.Forms.Button();
             this.textBoxStock = new System.Windows.Forms.TextBox();
             this.textBoxGametime = new System.Windows.Forms.TextBox();
@@ -66,7 +67,6 @@ namespace Laboration4
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxStorage = new System.Windows.Forms.ListBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.buttonSyncRemoteStorage = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.tabStore.SuspendLayout();
             this.tabStorage.SuspendLayout();
@@ -75,12 +75,12 @@ namespace Laboration4
             // 
             // listOfProducts
             // 
-            this.listOfProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listOfProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listOfProducts.FormattingEnabled = true;
-            this.listOfProducts.ItemHeight = 24;
+            this.listOfProducts.ItemHeight = 20;
             this.listOfProducts.Location = new System.Drawing.Point(8, 54);
             this.listOfProducts.Name = "listOfProducts";
-            this.listOfProducts.Size = new System.Drawing.Size(293, 340);
+            this.listOfProducts.Size = new System.Drawing.Size(293, 324);
             this.listOfProducts.TabIndex = 0;
             this.listOfProducts.SelectedIndexChanged += new System.EventHandler(this.listOfProducts_SelectedIndexChanged);
             // 
@@ -158,12 +158,12 @@ namespace Laboration4
             // 
             // listBoxShoppingCart
             // 
-            this.listBoxShoppingCart.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxShoppingCart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxShoppingCart.FormattingEnabled = true;
-            this.listBoxShoppingCart.ItemHeight = 24;
+            this.listBoxShoppingCart.ItemHeight = 20;
             this.listBoxShoppingCart.Location = new System.Drawing.Point(426, 51);
             this.listBoxShoppingCart.Name = "listBoxShoppingCart";
-            this.listBoxShoppingCart.Size = new System.Drawing.Size(293, 340);
+            this.listBoxShoppingCart.Size = new System.Drawing.Size(293, 324);
             this.listBoxShoppingCart.TabIndex = 16;
             this.listBoxShoppingCart.SelectedIndexChanged += new System.EventHandler(this.listBoxShoppingCart_SelectedIndexChanged);
             // 
@@ -225,6 +225,17 @@ namespace Laboration4
             this.tabStorage.TabIndex = 1;
             this.tabStorage.Text = "Lager";
             this.tabStorage.UseVisualStyleBackColor = true;
+            // 
+            // buttonSyncRemoteStorage
+            // 
+            this.buttonSyncRemoteStorage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSyncRemoteStorage.Location = new System.Drawing.Point(100, 352);
+            this.buttonSyncRemoteStorage.Name = "buttonSyncRemoteStorage";
+            this.buttonSyncRemoteStorage.Size = new System.Drawing.Size(105, 43);
+            this.buttonSyncRemoteStorage.TabIndex = 25;
+            this.buttonSyncRemoteStorage.Text = "Hämta Från Central Lager";
+            this.buttonSyncRemoteStorage.UseVisualStyleBackColor = true;
+            this.buttonSyncRemoteStorage.Click += new System.EventHandler(this.buttonSyncRemoteStorage_Click);
             // 
             // buttonNewProduct
             // 
@@ -453,29 +464,18 @@ namespace Laboration4
             // 
             // listBoxStorage
             // 
-            this.listBoxStorage.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxStorage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxStorage.FormattingEnabled = true;
-            this.listBoxStorage.ItemHeight = 24;
+            this.listBoxStorage.ItemHeight = 20;
             this.listBoxStorage.Location = new System.Drawing.Point(8, 6);
             this.listBoxStorage.Name = "listBoxStorage";
-            this.listBoxStorage.Size = new System.Drawing.Size(293, 340);
+            this.listBoxStorage.Size = new System.Drawing.Size(293, 324);
             this.listBoxStorage.TabIndex = 1;
             this.listBoxStorage.SelectedIndexChanged += new System.EventHandler(this.listBoxStorage_SelectedIndexChanged);
             // 
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
-            // 
-            // buttonSyncRemoteStorage
-            // 
-            this.buttonSyncRemoteStorage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSyncRemoteStorage.Location = new System.Drawing.Point(100, 352);
-            this.buttonSyncRemoteStorage.Name = "buttonSyncRemoteStorage";
-            this.buttonSyncRemoteStorage.Size = new System.Drawing.Size(105, 43);
-            this.buttonSyncRemoteStorage.TabIndex = 25;
-            this.buttonSyncRemoteStorage.Text = "Hämta Från Central Lager";
-            this.buttonSyncRemoteStorage.UseVisualStyleBackColor = true;
-            this.buttonSyncRemoteStorage.Click += new System.EventHandler(this.buttonSyncRemoteStorage_Click);
             // 
             // Form1
             // 
