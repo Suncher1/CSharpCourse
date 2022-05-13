@@ -34,6 +34,14 @@ namespace Laboration4.Backend
             }
 
         }
+        public bool HasProducts()
+        {
+            if (products == null || products.Count == 0)
+            {
+                return false;
+            }
+            return true;
+        }
         public List<Product> GetAllReservedProducts()
         {
             //https://stackoverflow.com/questions/54726354/get-all-objects-that-have-an-object-that-matches-a-string
@@ -54,111 +62,120 @@ namespace Laboration4.Backend
         }
         private void ReadAllProducts()
         {
-            //products = ReadAllProductsFromRemoteStorage();
-            //Läs produkter från csv fil
-            //Lägg till produkterna i product variabeln
-            int counter = 0;
-            // Read the file and display it line by line.  
-            foreach (string line in File.ReadLines(productsCsvFile))
-            {
-                if (counter == 0)
-                {
-                    counter++;
-                    continue;
-                }
-                //id,namn,pris,författare,genre,format,språk,plattform,speltid,antal
-                //parsa data och lagra in i en produkt
-                string[] dataValues = line.Split(',');
-                Product product = new Product();
-                product.Id = Int32.Parse(dataValues[0]);
-                product.Name = dataValues[1];
-                product.Price = Int32.Parse(dataValues[2]);
-                product.Author = dataValues[3];
-                product.Genre = dataValues[4];
-                product.Format = dataValues[5];
-                product.Language = dataValues[6];
-                product.Platform = dataValues[7];
-                if(!string.IsNullOrEmpty(dataValues[8]))
-                {
-                    product.Playtime = Int32.Parse(dataValues[8]);
-                } 
-                else
-                {
-                    product.Playtime = 0;
-                }
-                product.Stock = Int32.Parse(dataValues[9]);
-                product.Reserved = 0;
-                products.Add(product);
-                counter++;
-            }
+            products = ReadAllProductsFromRemoteStorage();
+
+            ////Läs produkter från csv fil
+            ////Lägg till produkterna i product variabeln
+            //int counter = 0;
+            //// Read the file and display it line by line.  
+            //foreach (string line in File.ReadLines(productsCsvFile))
+            //{
+            //    if (counter == 0)
+            //    {
+            //        counter++;
+            //        continue;
+            //    }
+            //    //id,namn,pris,författare,genre,format,språk,plattform,speltid,antal
+            //    //parsa data och lagra in i en produkt
+            //    string[] dataValues = line.Split(',');
+            //    Product product = new Product();
+            //    product.Id = Int32.Parse(dataValues[0]);
+            //    product.Name = dataValues[1];
+            //    product.Price = Int32.Parse(dataValues[2]);
+            //    product.Author = dataValues[3];
+            //    product.Genre = dataValues[4];
+            //    product.Format = dataValues[5];
+            //    product.Language = dataValues[6];
+            //    product.Platform = dataValues[7];
+            //    if(!string.IsNullOrEmpty(dataValues[8]))
+            //    {
+            //        product.Playtime = Int32.Parse(dataValues[8]);
+            //    } 
+            //    else
+            //    {
+            //        product.Playtime = 0;
+            //    }
+            //    product.Stock = Int32.Parse(dataValues[9]);
+            //    product.Reserved = 0;
+            //    products.Add(product);
+            //    counter++;
+            //}
         }
         private List<Product> ReadAllProductsFromRemoteStorage()
         {
-            var productsFromXml = new List<Product>();
-
-            //https://stackoverflow.com/questions/5102865/asp-net-load-xml-file-from-url
-            //Kontakta api och hämta alla produkter
-            XmlDocument xdoc = new XmlDocument();//xml doc used for xml parsing
-
-            xdoc.Load(
-                "https://hex.cse.kau.se/~jonavest/csharp-api/"
-                );//loading XML in xml doc
-
-            XmlNodeList xNodeProductList = xdoc.DocumentElement.SelectNodes("products/*");//reading node so that we can traverse thorugh the XML
-
-            foreach (XmlNode xNodeProduct in xNodeProductList)//traversing XML 
+            try
             {
-                
-                Product product = new Product();
-                product.Playtime = 0;
-                product.Reserved = 0;
+                var productsFromXml = new List<Product>();
 
-                foreach (XmlNode xNodeProductInfo in xNodeProduct.ChildNodes)
+                //https://stackoverflow.com/questions/5102865/asp-net-load-xml-file-from-url
+                //Kontakta api och hämta alla produkter
+                XmlDocument xdoc = new XmlDocument();//xml doc used for xml parsing
+
+                xdoc.Load(
+                    "https://hex.cse.kau.se/~jonavest/csharp-api/"
+                    );//loading XML in xml doc
+
+                XmlNodeList xNodeProductList = xdoc.DocumentElement.SelectNodes("products/*");//reading node so that we can traverse thorugh the XML
+
+                foreach (XmlNode xNodeProduct in xNodeProductList)//traversing XML 
                 {
-                    if (xNodeProductInfo.Name == "id")
+
+                    Product product = new Product();
+                    product.Playtime = 0;
+                    product.Reserved = 0;
+
+                    foreach (XmlNode xNodeProductInfo in xNodeProduct.ChildNodes)
                     {
-                        product.Id = Int32.Parse(xNodeProductInfo.InnerText);
+                        if (xNodeProductInfo.Name == "id")
+                        {
+                            product.Id = Int32.Parse(xNodeProductInfo.InnerText);
+                        }
+                        if (xNodeProductInfo.Name == "name")
+                        {
+                            product.Name = xNodeProductInfo.InnerText;
+                        }
+                        if (xNodeProductInfo.Name == "price")
+                        {
+                            product.Price = Int32.Parse(xNodeProductInfo.InnerText);
+                        }
+                        if (xNodeProductInfo.Name == "author")
+                        {
+                            product.Author = xNodeProductInfo.InnerText;
+                        }
+                        if (xNodeProductInfo.Name == "genre")
+                        {
+                            product.Genre = xNodeProductInfo.InnerText;
+                        }
+                        if (xNodeProductInfo.Name == "format")
+                        {
+                            product.Format = xNodeProductInfo.InnerText;
+                        }
+                        if (xNodeProductInfo.Name == "language")
+                        {
+                            product.Language = xNodeProductInfo.InnerText;
+                        }
+                        if (xNodeProductInfo.Name == "platform")
+                        {
+                            product.Platform = xNodeProductInfo.InnerText;
+                        }
+                        if (xNodeProductInfo.Name == "playtime")
+                        {
+                            product.Playtime = Int32.Parse(xNodeProductInfo.InnerText);
+                        }
+                        if (xNodeProductInfo.Name == "stock")
+                        {
+                            product.Stock = Int32.Parse(xNodeProductInfo.InnerText);
+                        }
                     }
-                    if (xNodeProductInfo.Name == "name")
-                    {
-                        product.Name = xNodeProductInfo.InnerText;
-                    }
-                    if (xNodeProductInfo.Name == "price")
-                    {
-                        product.Price = Int32.Parse(xNodeProductInfo.InnerText);
-                    }
-                    if (xNodeProductInfo.Name == "author")
-                    {
-                        product.Author = xNodeProductInfo.InnerText;
-                    }
-                    if (xNodeProductInfo.Name == "genre")
-                    {
-                        product.Genre = xNodeProductInfo.InnerText;
-                    }
-                    if (xNodeProductInfo.Name == "format")
-                    {
-                        product.Format = xNodeProductInfo.InnerText;
-                    }
-                    if (xNodeProductInfo.Name == "language")
-                    {
-                        product.Language = xNodeProductInfo.InnerText;
-                    }
-                    if (xNodeProductInfo.Name == "platform")
-                    {
-                        product.Platform = xNodeProductInfo.InnerText;
-                    }
-                    if (xNodeProductInfo.Name == "playtime")
-                    {
-                        product.Playtime = Int32.Parse(xNodeProductInfo.InnerText);
-                    }
-                    if (xNodeProductInfo.Name == "stock")
-                    {
-                        product.Stock = Int32.Parse(xNodeProductInfo.InnerText);
-                    }              
+                    productsFromXml.Add(product);
                 }
-                productsFromXml.Add(product);
+                return productsFromXml;
             }
-            return productsFromXml;
+            catch
+            {
+                return new List<Product>();
+            }
+
         }
 
         public void AddProduct(Product product)
@@ -260,9 +277,11 @@ namespace Laboration4.Backend
 
         public bool SyncProductsFromRemoteStorage()
         {
-            try
-            {
                 var remoteProducts = ReadAllProductsFromRemoteStorage();
+                if(remoteProducts == null || remoteProducts.Count == 0)
+                {
+                    return false;
+                }
                 //Loppa igenom våra produkter som finns lokalt
                 foreach (Product product in products)
                 {
@@ -276,12 +295,6 @@ namespace Laboration4.Backend
                     }
                 }
                 return true;
-            }
-            catch
-            {
-                return false;
-            }
-
         }
     }
 }

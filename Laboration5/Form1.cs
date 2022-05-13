@@ -33,6 +33,12 @@ namespace Laboration4
 
         private void DisplayProductsFromStorage()
         {
+            if(!storage.HasProducts())
+            {
+                MessageBox.Show("Kunde inte hämta produkter, starta om programmet!");
+                return;
+            }
+
             //Hämtar produkter och visar i lager
             var listStorageProducts = storage.GetAllProducts();
             listBoxStorage.Items.Clear();
@@ -362,20 +368,6 @@ namespace Laboration4
                     DisplayProductsFromStorage();
                     ClearProductInput();
                 }
-
-
-
-                //var currentSelectedIndex = listBoxStorage.SelectedIndex;
-                //var product = storage.GetProductByIndex(currentSelectedIndex);
-                //if (product == null)
-                //{
-                //    MessageBox.Show("Kan inte hitta produkten");
-                //}
-                //else
-                //{
-                //    //skapa ny produkt
-
-                //}
             }
         }
 
@@ -478,8 +470,12 @@ namespace Laboration4
 
         private void buttonSyncRemoteStorage_Click(object sender, EventArgs e)
         {
-            storage.SyncProductsFromRemoteStorage();
-            DisplayProductsFromStorage();
+            var result = storage.SyncProductsFromRemoteStorage();
+            if(!result)
+            {
+                MessageBox.Show("Det gick inte att synkronisera alla produkter");
+            }
+            DisplayProductsFromStorage(); 
         }
     }
 }

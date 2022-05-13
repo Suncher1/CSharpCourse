@@ -67,6 +67,7 @@ namespace Laboration4
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxStorage = new System.Windows.Forms.ListBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.buttonSyncStorageToRemote = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.tabStore.SuspendLayout();
             this.tabStorage.SuspendLayout();
@@ -193,6 +194,7 @@ namespace Laboration4
             // 
             // tabStorage
             // 
+            this.tabStorage.Controls.Add(this.buttonSyncStorageToRemote);
             this.tabStorage.Controls.Add(this.buttonSyncRemoteStorage);
             this.tabStorage.Controls.Add(this.buttonNewProduct);
             this.tabStorage.Controls.Add(this.textBoxStock);
@@ -229,7 +231,7 @@ namespace Laboration4
             // buttonSyncRemoteStorage
             // 
             this.buttonSyncRemoteStorage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSyncRemoteStorage.Location = new System.Drawing.Point(100, 352);
+            this.buttonSyncRemoteStorage.Location = new System.Drawing.Point(38, 352);
             this.buttonSyncRemoteStorage.Name = "buttonSyncRemoteStorage";
             this.buttonSyncRemoteStorage.Size = new System.Drawing.Size(105, 43);
             this.buttonSyncRemoteStorage.TabIndex = 25;
@@ -477,6 +479,16 @@ namespace Laboration4
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // buttonSyncStorageToRemote
+            // 
+            this.buttonSyncStorageToRemote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSyncStorageToRemote.Location = new System.Drawing.Point(170, 352);
+            this.buttonSyncStorageToRemote.Name = "buttonSyncStorageToRemote";
+            this.buttonSyncStorageToRemote.Size = new System.Drawing.Size(105, 43);
+            this.buttonSyncStorageToRemote.TabIndex = 26;
+            this.buttonSyncStorageToRemote.Text = "Uppdatera Central Lager";
+            this.buttonSyncStorageToRemote.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -536,6 +548,7 @@ namespace Laboration4
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Button buttonReturn;
         private System.Windows.Forms.Button buttonSyncRemoteStorage;
+        private System.Windows.Forms.Button buttonSyncStorageToRemote;
     }
 }
 
