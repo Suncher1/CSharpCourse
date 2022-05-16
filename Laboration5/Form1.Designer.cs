@@ -95,7 +95,6 @@ namespace Laboration4
             this.TabControl.SelectedIndex = 0;
             this.TabControl.Size = new System.Drawing.Size(859, 450);
             this.TabControl.TabIndex = 1;
-            this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             // 
             // tabStore
             // 

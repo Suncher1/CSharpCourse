@@ -83,6 +83,8 @@ namespace Laboration4
             {
                 FillProductInput(selectedProduct);
                 buttonNewProduct.Enabled = true;
+                buttonSyncRemoteStorage.Enabled = false;
+                buttonSyncStorageToRemote.Enabled = false;
             }
         }
 
@@ -101,6 +103,8 @@ namespace Laboration4
             buttonDelete.Enabled = false;
             buttonNewProduct.Enabled = false;
             selectedProduct = null;
+            buttonSyncRemoteStorage.Enabled = true;
+            buttonSyncStorageToRemote.Enabled = true;
         }
 
         private void FillProductInput(Product product)
@@ -468,6 +472,7 @@ namespace Laboration4
             }   
         }
 
+        //Knapp för att synkronisera det lokala lagret med data som finns i xml url-en
         private void buttonSyncRemoteStorage_Click(object sender, EventArgs e)
         {
             var result = storage.SyncProductsFromRemoteStorage();
@@ -478,6 +483,7 @@ namespace Laboration4
             DisplayProductsFromStorage(); 
         }
 
+        //Knapp för att synkronisera datan som finns i det lokala lagret med xml url-en
         private void buttonSyncStorageToRemote_Click(object sender, EventArgs e)
         {
             var result = storage.SyncProductsToRemoteStorage();
@@ -487,9 +493,5 @@ namespace Laboration4
             }
         }
 
-        private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

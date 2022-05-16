@@ -103,6 +103,8 @@ namespace Laboration4.Backend
             //    counter++;
             //}
         }
+        
+        //En lista som får data om alla produkter från centrallagret
         private List<Product> ReadAllProductsFromRemoteStorage()
         {
             try
@@ -259,6 +261,7 @@ namespace Laboration4.Backend
 
         public void CheckoutProducts()
         {
+            //Först synkas produkterna
             SyncProductsFromRemoteStorage();
             latestPurchase = "KVITTO: \n";
             foreach (var product in products)
@@ -268,10 +271,11 @@ namespace Laboration4.Backend
                     latestPurchase += $"{product.Name} Antal:{product.Reserved} Pris:{product.Price * product.Reserved}\n";
                     product.Stock = product.Stock - product.Reserved;
                     product.Reserved = 0;
-                    //Anropa centrallagret och uppdater produkten
+                    //Anropa centrallagret och uppdaterar produkter som köpts
                     SyncOneProductToRemoteStorage(product.Id, product.Stock);
                 }
             }
+            //Produkterna synkas igen efter köpet
             SyncProductsFromRemoteStorage();
             StoreAllProducts();
         }
@@ -281,6 +285,7 @@ namespace Laboration4.Backend
             return latestPurchase;
         }
 
+        //Funktion som synkroniserar det lokala lagret med data från xml url-en
         public bool SyncProductsFromRemoteStorage()
         {
             var remoteProducts = ReadAllProductsFromRemoteStorage();
@@ -302,10 +307,13 @@ namespace Laboration4.Backend
             }
             return true;
         }
+
+        //Funktion som synkroniserar xml url-en med data från det lokala lagret
         public bool SyncProductsToRemoteStorage()
         {
             try
             {
+                //Lopar igenom varje produkt som ska synkriniseras
                 foreach (Product product in products)
                 {
                     SyncOneProductToRemoteStorage(product.Id, product.Stock);
@@ -323,6 +331,8 @@ namespace Laboration4.Backend
                 return false;
             }
         }
+
+        //Funktion som synkroniserar en produkt från det lokala lagret till xml url-en
         public bool SyncOneProductToRemoteStorage(int id, int stock)
         {
             try
